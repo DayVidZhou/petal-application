@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="132" id="KGk-i7-Jjw" customClass="TipTableViewCell" customModule="Petal" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="369" height="132"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="369" height="131.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Heres a way to cut back on laundry" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qEP-vA-NeT">
+                        <rect key="frame" x="31" y="57" width="163" height="49"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="washer" translatesAutoresizingMaskIntoConstraints="NO" id="ncB-ad-XU1">
+                        <rect key="frame" x="254" y="37.5" width="100" height="94"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="qOx-ou-CLg"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today's Tip" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J5K-7t-hRe">
+                        <rect key="frame" x="31" y="26" width="87" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="87" id="QLf-5O-gpj"/>
+                            <constraint firstAttribute="height" constant="21" id="atN-Bz-qSd"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="qEP-vA-NeT" firstAttribute="leading" secondItem="J5K-7t-hRe" secondAttribute="leading" id="Akw-lT-0G3"/>
+                    <constraint firstAttribute="trailing" secondItem="ncB-ad-XU1" secondAttribute="trailing" constant="15" id="I5E-ML-iW2"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="qEP-vA-NeT" secondAttribute="bottom" constant="15" id="XnZ-bt-zud"/>
+                    <constraint firstItem="qEP-vA-NeT" firstAttribute="top" secondItem="J5K-7t-hRe" secondAttribute="bottom" constant="10" id="Xx5-nB-cMo"/>
+                    <constraint firstItem="ncB-ad-XU1" firstAttribute="leading" secondItem="qEP-vA-NeT" secondAttribute="trailing" constant="60" id="bjH-Du-2sz"/>
+                    <constraint firstItem="J5K-7t-hRe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="15" id="dLE-8t-edY"/>
+                    <constraint firstItem="J5K-7t-hRe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="15" id="khW-SY-edt"/>
+                    <constraint firstItem="ncB-ad-XU1" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottom" id="men-IC-rD9"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="tipImage" destination="ncB-ad-XU1" id="3qB-yo-3If"/>
+                <outlet property="tipText" destination="qEP-vA-NeT" id="n8w-cf-usD"/>
+            </connections>
+            <point key="canvasLocation" x="122.40000000000001" y="165.51724137931035"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="washer" width="103" height="94"/>
+    </resources>
+</document>

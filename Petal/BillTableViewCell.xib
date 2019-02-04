@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="132" id="KGk-i7-Jjw" customClass="BillTableViewCell" customModule="Petal" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="319" height="132"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="319" height="131.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your bill this month" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IRz-nn-PRt">
+                        <rect key="frame" x="26" y="26" width="124" height="23.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                        <size key="shadowOffset" width="0.0" height="0.0"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Eco-points" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pRU-QH-1m6">
+                        <rect key="frame" x="180" y="26" width="71" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ecoPoints" translatesAutoresizingMaskIntoConstraints="NO" id="Ojb-m7-APc">
+                        <rect key="frame" x="180" y="69.5" width="32" height="32"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="Ojb-m7-APc" secondAttribute="height" multiplier="1:1" id="IwF-DC-bho"/>
+                            <constraint firstAttribute="height" constant="32" id="Zaa-t2-Qud"/>
+                            <constraint firstAttribute="width" constant="32" id="oam-4K-ccD"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="436" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c2W-3E-GaF">
+                        <rect key="frame" x="222" y="71" width="46" height="29"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mMG-Kl-Sci">
+                        <rect key="frame" x="159" y="26" width="1" height="75"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="1" id="8QP-ob-MZm"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$423.45" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="98B-U5-A88">
+                        <rect key="frame" x="26" y="69.5" width="124" height="32"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="32" id="O3L-dO-wqx"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="bottomMargin" secondItem="mMG-Kl-Sci" secondAttribute="bottom" constant="20" id="0gb-PD-cYP"/>
+                    <constraint firstItem="pRU-QH-1m6" firstAttribute="top" secondItem="IRz-nn-PRt" secondAttribute="top" id="1rE-ZA-U0H"/>
+                    <constraint firstItem="Ojb-m7-APc" firstAttribute="leading" secondItem="mMG-Kl-Sci" secondAttribute="trailing" constant="20" id="9a4-g1-WUM"/>
+                    <constraint firstItem="Ojb-m7-APc" firstAttribute="leading" secondItem="pRU-QH-1m6" secondAttribute="leading" id="Ex0-17-tUY"/>
+                    <constraint firstItem="98B-U5-A88" firstAttribute="top" secondItem="IRz-nn-PRt" secondAttribute="bottom" constant="20" id="FDX-8m-agJ"/>
+                    <constraint firstItem="IRz-nn-PRt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="GNo-fG-sYY"/>
+                    <constraint firstItem="98B-U5-A88" firstAttribute="trailing" secondItem="IRz-nn-PRt" secondAttribute="trailing" id="HMr-ar-tJX"/>
+                    <constraint firstItem="mMG-Kl-Sci" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="KbW-wb-1XL"/>
+                    <constraint firstItem="Ojb-m7-APc" firstAttribute="centerY" secondItem="98B-U5-A88" secondAttribute="centerY" id="LTZ-9G-DhW"/>
+                    <constraint firstAttribute="bottom" secondItem="98B-U5-A88" secondAttribute="bottom" constant="30" id="YRn-Uj-tfY"/>
+                    <constraint firstItem="c2W-3E-GaF" firstAttribute="leading" secondItem="Ojb-m7-APc" secondAttribute="trailing" constant="10" id="t9r-rK-cFA"/>
+                    <constraint firstItem="98B-U5-A88" firstAttribute="leading" secondItem="IRz-nn-PRt" secondAttribute="leading" id="u3S-R4-XHt"/>
+                    <constraint firstItem="mMG-Kl-Sci" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="15" id="wGx-5G-xfE"/>
+                    <constraint firstItem="IRz-nn-PRt" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="15" id="yDc-eu-iAQ"/>
+                    <constraint firstItem="c2W-3E-GaF" firstAttribute="centerY" secondItem="Ojb-m7-APc" secondAttribute="centerY" id="yPi-sf-PRr"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="billText" destination="98B-U5-A88" id="mxA-sB-l4Y"/>
+                <outlet property="pointsText" destination="c2W-3E-GaF" id="Ubf-9V-dB5"/>
+            </connections>
+            <point key="canvasLocation" x="-892" y="-2.6986506746626691"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="ecoPoints" width="100" height="100"/>
+    </resources>
+</document>

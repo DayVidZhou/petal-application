@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Petal" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zEO-bw-iGc" customClass="BarChart" customModule="Petal" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44" width="414" height="430"/>
+                                <color key="backgroundColor" red="0.11764705882352941" green="0.81960784313725488" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.92157477139999999" green="0.92155748609999999" blue="0.92156922819999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="430" id="CSt-jz-T0i"/>
+                                </constraints>
+                                <viewLayoutGuide key="safeArea" id="nR1-ui-Mf3"/>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DVG-Mh-m7H">
+                                <rect key="frame" x="0.0" y="464" width="414" height="398"/>
+                                <color key="backgroundColor" red="0.92157477140426636" green="0.92155748605728149" blue="0.92156922817230225" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="sectionIndexBackgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <tableView key="tableFooterView" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="lVF-RO-Xed">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="197"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" red="0.92157477139999999" green="0.92155748609999999" blue="0.92156922819999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="sectionIndexBackgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </tableView>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="DVG-Mh-m7H" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="JBg-uf-rNh"/>
+                            <constraint firstItem="DVG-Mh-m7H" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="K44-5Z-8Ar"/>
+                            <constraint firstItem="zEO-bw-iGc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="L67-ZQ-D8Y"/>
+                            <constraint firstItem="zEO-bw-iGc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="TiR-cn-wO2"/>
+                            <constraint firstItem="DVG-Mh-m7H" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Znv-GQ-DVj"/>
+                            <constraint firstItem="zEO-bw-iGc" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="kkV-pN-d9V"/>
+                            <constraint firstItem="zEO-bw-iGc" firstAttribute="bottom" secondItem="DVG-Mh-m7H" secondAttribute="top" constant="10" id="yFO-WP-Ii7"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="MainTable" destination="DVG-Mh-m7H" id="5JS-vy-frR"/>
+                        <outlet property="barChart" destination="zEO-bw-iGc" id="1om-DO-ukh"/>
+                        <outlet property="homeTableView" destination="DVG-Mh-m7H" id="N9t-Pz-zDa"/>
+                        <outlet property="mainTable" destination="DVG-Mh-m7H" id="38c-LA-dHf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
+        </scene>
+    </scenes>
+</document>
