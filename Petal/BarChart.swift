@@ -15,10 +15,10 @@ class BarChart: UIView {
     let space: CGFloat = 20.0
     
     /// space at the bottom of the bar to show the title
-    private let bottomSpace: CGFloat = 40.0
+    private let bottomSpace: CGFloat = 50.0
     
     /// space at the top of each bar to show the value
-    private let topSpace: CGFloat = 40.0
+    private let topSpace: CGFloat = 100.0
     
     private let mainLayer: CALayer = CALayer()
     private let scrollView: UIScrollView = UIScrollView()
@@ -29,6 +29,7 @@ class BarChart: UIView {
             
             if let dataEntries = dataEntries {
                 scrollView.contentSize = CGSize(width: (barWidth + space)*CGFloat(dataEntries.count), height: self.frame.size.height)
+                //scrollView.contentOffset = CGPoint(x: (barWidth + space)*CGFloat(dataEntries.count) - UIScreen.main.bounds.width, y: 0)
                 mainLayer.frame = CGRect(x: 0, y: 0, width: scrollView.contentSize.width, height: scrollView.contentSize.height)
                 
                 for i in 0..<dataEntries.count {
@@ -83,6 +84,7 @@ class BarChart: UIView {
         let barLayer = CALayer()
         barLayer.frame = CGRect(x: xPos, y: yPos, width: barWidth, height: mainLayer.frame.height - bottomSpace - yPos)
         barLayer.backgroundColor = color.cgColor
+        barLayer.cornerRadius = 5
         mainLayer.addSublayer(barLayer)
     }
     

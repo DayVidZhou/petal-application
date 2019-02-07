@@ -15,7 +15,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     
     @IBOutlet weak var barChart: BarChart!
     @IBOutlet weak var homeTableView: UITableView!
-    @IBOutlet weak var mainTable: UITableView!
+    @IBOutlet weak var weekBtn: UIButton!
+    @IBOutlet weak var monthBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,17 +31,36 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         barChart.dataEntries = dataEntries
     }
     
+    func weekMonthPressed(sender:AnyObject) {
+        guard let button = sender as? UIButton else { return }
+        let fontColor = UIColor(red: 211, green: 242, blue: 232, alpha: 1)
+        if !button.isSelected {
+            button.isSelected = true
+            button.titleLabel?.textColor = UIColor.white
+        }
+        switch button.titleLabel?.text {
+        case "THIS WEEK":
+            monthBtn.titleLabel?.textColor = fontColor
+            monthBtn.isSelected = false
+        case "MONTH":
+            weekBtn.titleLabel?.textColor = fontColor
+            weekBtn.isSelected = false
+        default:
+            monthBtn.titleLabel?.textColor = fontColor
+            monthBtn.isSelected = false
+        }
+    }
+    
     func generateDataEntries() -> [BarEntry] {
         let barColor = #colorLiteral(red: 0.8274509804, green: 0.9490196078, blue: 0.9098039216, alpha: 1)
         var result: [BarEntry] = []
-        for i in 0..<20 {
+        for i in 0..<6 {
             let value = (arc4random() % 90) + 10
             let height: Float = Float(value) / 100.0
-            
             let formatter = DateFormatter()
             formatter.dateFormat = "d MMM"
             var date = Date()
-            date.addTimeInterval(TimeInterval(24*60*60*i))
+            date.addTimeInterval(TimeInterval(24*60*60 * -i))
             result.append(BarEntry(color: barColor, height: height, textValue: "\(value)", title: formatter.string(from: date)))
         }
         return result
