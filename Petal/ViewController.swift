@@ -17,13 +17,20 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     @IBOutlet weak var homeTableView: UITableView!
     @IBOutlet weak var weekBtn: UIButton!
     @IBOutlet weak var monthBtn: UIButton!
-    
+    @IBOutlet weak var powerlabel: UILabel!
+    var baseURL = "https://flask-petal.herokuapp.com/"
     override func viewDidLoad() {
+        print("testing print")
         super.viewDidLoad()
         // Handle the text field’s user input through delegate callbacks.
         homeTableView.delegate = self
         homeTableView.dataSource = self
+        homeTableView.allowsSelection = false
+        weekBtn.titleLabel?.textColor = UIColor.white
+        weekBtn.addTarget(self, action: #selector(weekMonthPressed), for: .touchUpInside)
+        monthBtn.addTarget(self, action: #selector(weekMonthPressed), for: .touchUpInside)
         // Do any additional setup after loading the view, typically from a nib.
+        setButtonState()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -31,31 +38,58 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         barChart.dataEntries = dataEntries
     }
     
-    func weekMonthPressed(sender:AnyObject) {
-        guard let button = sender as? UIButton else { return }
-        let fontColor = UIColor(red: 211, green: 242, blue: 232, alpha: 1)
+    func setButtonState() {
+        //let fontColor = UIColor(red: 211, green: 242, blue: 232, alpha: 1)
+        monthBtn.setTitleColor(UIColor(white: 1, alpha: 0.5), for: .normal)
+        weekBtn.setTitleColor(UIColor(white: 1, alpha: 0.5), for: .normal)
+        monthBtn.setTitleColor(UIColor.white, for: .selected)
+        weekBtn.setTitleColor(UIColor.white, for: .selected)
+        weekBtn.tintColor = UIColor(white: 0, alpha: 0)
+        monthBtn.tintColor = UIColor(white: 0, alpha: 0)
+    }
+    
+    @objc func weekMonthPressed(sender:UIButton) {
+        let button = sender
+        print(button.titleLabel?.text)
+        print("the state is ", button.isSelected)
         if !button.isSelected {
             button.isSelected = true
-            button.titleLabel?.textColor = UIColor.white
         }
+        
         switch button.titleLabel?.text {
         case "THIS WEEK":
-            monthBtn.titleLabel?.textColor = fontColor
             monthBtn.isSelected = false
         case "MONTH":
-            weekBtn.titleLabel?.textColor = fontColor
             weekBtn.isSelected = false
         default:
-            monthBtn.titleLabel?.textColor = fontColor
             monthBtn.isSelected = false
         }
+        populateData()
+    }
+    
+    func populateData() {
+        let link = "https://flask-petal.herokuapp.com/measurements?start=03-01-2019-00&end=03-04-2019-00"
+        let linkURL = URL(string: link)!
+        let task = URLSession.shared.dataTask(with: linkURL) { (data, response, error) in
+            if error == nil {
+                do {
+                    let jsonresponse = try JSONSerialization.jsonObject(with: data!, options: [])
+                    print("THE DATA IS ", jsonresponse)
+                    let jsonArray = jsonresponse as? [[String: Any]]
+                    
+                } catch let e{
+                    print("ERROR IS ,", e)
+                }
+            }
+        }
+        task.resume()
     }
     
     func generateDataEntries() -> [BarEntry] {
         let barColor = #colorLiteral(red: 0.8274509804, green: 0.9490196078, blue: 0.9098039216, alpha: 1)
         var result: [BarEntry] = []
         for i in 0..<6 {
-            let value = (arc4random() % 90) + 10
+            let value = (arc4random() % 80) + 10
             let height: Float = Float(value) / 100.0
             let formatter = DateFormatter()
             formatter.dateFormat = "d MMM"
