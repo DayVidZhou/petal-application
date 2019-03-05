@@ -8,8 +8,6 @@
 
 import UIKit
 
-
-
 class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
 
     
@@ -18,11 +16,13 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     @IBOutlet weak var weekBtn: UIButton!
     @IBOutlet weak var monthBtn: UIButton!
     @IBOutlet weak var powerlabel: UILabel!
+    
     var baseURL = "https://flask-petal.herokuapp.com/"
     let dateFormatter = DateFormatter()
     let today = Date()
     var totalpower: Double = 0.0
     let startdate: String = "03-01-2019-00"
+    
     override func viewDidLoad() {
         print("testing print")
         super.viewDidLoad()
@@ -38,9 +38,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        let dataEntries = generateDataEntries()
-        barChart.dataEntries = dataEntries
         dateFormatter.dateFormat = "MM-dd-yyyy-HH"
+        populateData(type: "THIS WEEK")
     }
     
     func setButtonState() {
@@ -72,7 +71,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         populateData(type: (button.titleLabel?.text)!)
     }
     
-    // This function calls the http request
+    // This function handles the http request and passes the jsonarray to processdata
     func populateData(type: String) {
         let calendar = Calendar(identifier: .gregorian)
         let components = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: today)
@@ -101,17 +100,30 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         let range = calendar.range(of: .day, in: .month, for: today)!
         let numDays = range.count
         var powerList = [Double](repeating: 0.0, count: numDays)
-        //print("DATA GOTTE NIS ", data)
         for x in data {
             let power = x["power"] as? Double
             totalpower += power!
-            print("The power is ", power!)
             
             let dateStr = x["time"] as? String
-            let components = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: today)
-            
+            let date = dateFormatter.date(from: dateStr!)
+            let components = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: date!)
+            powerList[components.day!] += power!
         }
+        var finalList = [Double]()
+        if type == "THIS WEEK" {
+            let components = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: today)
+            let startindex = components.day! - dayofweek!
+            let endindex = components.day! + 7 - dayofweek! - 1
+            print("The startindex is ", startindex, " the day is ", components.day!, " day of week is ", dayofweek!)
+            finalList = Array<Double>(powerList[startindex...endindex])
+        } else {
+            finalList = powerList
+        }
+        
+        populateBarChart(data: finalList)
+        
     }
+    
     
     func getDayOfWeek(_ today: Date) -> Int? {
         let myCalendar = Calendar(identifier: .gregorian)
@@ -119,7 +131,15 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         return weekDay
     }
     
-    func generateDataEntries() -> [BarEntry] {
+    func populateBarChart(data: [Double]) {
+        let dataEntries = generateDataEntries(data: data)
+        DispatchQueue.main.async {
+            self.barChart.dataEntries = dataEntries
+        }
+    }
+    
+    func generateDataEntries(data: [Double]) -> [BarEntry] {
+        print("THe data gotten for chart is ", data)
         let barColor = #colorLiteral(red: 0.8274509804, green: 0.9490196078, blue: 0.9098039216, alpha: 1)
         var result: [BarEntry] = []
         for i in 0..<6 {
@@ -141,6 +161,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         return true
     }
     
+    
+    // All the table view stuff
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 //        var cellArr = [UITableViewCell]()
         if indexPath.row == 0 {
@@ -159,10 +181,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
             
         }
     }
-    
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        
-//    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
