@@ -19,6 +19,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     @IBOutlet weak var monthBtn: UIButton!
     @IBOutlet weak var powerlabel: UILabel!
     var baseURL = "https://flask-petal.herokuapp.com/"
+    let dateFormatter = DateFormatter()
+    let today = Date()
+    var totalpower: Double = 0.0
+    let startdate: String = "03-01-2019-00"
     override func viewDidLoad() {
         print("testing print")
         super.viewDidLoad()
@@ -36,6 +40,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     override func viewDidAppear(_ animated: Bool) {
         let dataEntries = generateDataEntries()
         barChart.dataEntries = dataEntries
+        dateFormatter.dateFormat = "MM-dd-yyyy-HH"
     }
     
     func setButtonState() {
@@ -50,7 +55,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     
     @objc func weekMonthPressed(sender:UIButton) {
         let button = sender
-        print(button.titleLabel?.text)
+        print(button.titleLabel?.text as Any)
         print("the state is ", button.isSelected)
         if !button.isSelected {
             button.isSelected = true
@@ -64,25 +69,54 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         default:
             monthBtn.isSelected = false
         }
-        populateData()
+        populateData(type: (button.titleLabel?.text)!)
     }
     
-    func populateData() {
-        let link = "https://flask-petal.herokuapp.com/measurements?start=03-01-2019-00&end=03-04-2019-00"
+    // This function calls the http request
+    func populateData(type: String) {
+        let calendar = Calendar(identifier: .gregorian)
+        let components = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: today)
+        let endday = components.day! + 1
+        
+        let link: String = baseURL + "measurements?start=" + startdate + "&end=03-" + String(endday) + "-2019-00"
         let linkURL = URL(string: link)!
         let task = URLSession.shared.dataTask(with: linkURL) { (data, response, error) in
             if error == nil {
                 do {
                     let jsonresponse = try JSONSerialization.jsonObject(with: data!, options: [])
-                    print("THE DATA IS ", jsonresponse)
-                    let jsonArray = jsonresponse as? [[String: Any]]
-                    
+                    let jsonArray = jsonresponse as! [[String: Any]]
+                    self.processData(data: jsonArray, type: type)
                 } catch let e{
                     print("ERROR IS ,", e)
                 }
             }
         }
         task.resume()
+    }
+    
+    // This function uses the data gotten from the HTTP request and sends the correct power array to generate Data entry
+    func processData(data: [[String: Any]], type: String) {
+        let dayofweek = getDayOfWeek(today)
+        let calendar = Calendar(identifier: .gregorian)
+        let range = calendar.range(of: .day, in: .month, for: today)!
+        let numDays = range.count
+        var powerList = [Double](repeating: 0.0, count: numDays)
+        //print("DATA GOTTE NIS ", data)
+        for x in data {
+            let power = x["power"] as? Double
+            totalpower += power!
+            print("The power is ", power!)
+            
+            let dateStr = x["time"] as? String
+            let components = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: today)
+            
+        }
+    }
+    
+    func getDayOfWeek(_ today: Date) -> Int? {
+        let myCalendar = Calendar(identifier: .gregorian)
+        let weekDay = myCalendar.component(.weekday, from: today)
+        return weekDay
     }
     
     func generateDataEntries() -> [BarEntry] {
