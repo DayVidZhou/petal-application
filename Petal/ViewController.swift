@@ -104,7 +104,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         let numDays = range.count
         var powerList = [Double](repeating: 0.0, count: numDays)
         totalpower = 0
-        
         for x in data {
             let power = x["power"] as? Double
             totalpower += power!
@@ -124,7 +123,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
             finalList = powerList
         }
         let maxpower = finalList.max()
-        print("The total power is ", totalpower, " the max power is", maxpower)
+        print("The total power is ", totalpower, " the max power is", maxpower!)
         DispatchQueue.main.async {
             self.powerlabel.text = String(self.totalpower)
         }
@@ -144,24 +143,21 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
             self.barChart.dataEntries = dataEntries
         }
     }
-//     3 4 5 6 7 8 9
-    //                  4
-//     0 1 2 3 4 5 6
+    
     func generateDataEntries(data: [Double], maxpower: Double) -> [BarEntry] {
         print("THe data gotten for chart is ", data)
         let barColor = #colorLiteral(red: 0.8274509804, green: 0.9490196078, blue: 0.9098039216, alpha: 1)
         var result: [BarEntry] = []
-        let formatter = DateFormatter()
-        formatter.dateFormat = "E"
-        let dayofweek = getDayOfWeek(today)
+        let weeklabel = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"]
+        
         for i in 0..<data.count {
-            let components = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: today)
             let value = (data[i]/maxpower)*80
             let height: Float = Float(value) / 100.0
-            
-            let date = Calendar.current.date(byAdding: .day, value: -(components.day! - dayofweek! + 1 + i), to: Date())
-            print("The date is ", date)
-            result.append(BarEntry(color: barColor, height: height, textValue: "\(value)", title: formatter.string(from: date!)))
+            var title = ""
+            if data.count == 7 {
+                title = weeklabel[i]
+            }
+            result.append(BarEntry(color: barColor, height: height, textValue: "\(data[i])", title: title))
         }
         return result
     }
