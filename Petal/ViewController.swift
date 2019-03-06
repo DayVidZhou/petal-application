@@ -18,8 +18,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     @IBOutlet weak var powerlabel: UILabel!
     
     var baseURL = "https://flask-petal.herokuapp.com/"
+    
+    // initializing variables used for date objects
     let dateFormatter = DateFormatter()
     let today = Date()
+    let calendar = Calendar(identifier: .gregorian)
     var totalpower: Double = 0.0
     let startdate: String = "03-01-2019-00"
     
@@ -42,6 +45,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         populateData(type: "THIS WEEK")
     }
     
+    // setting the button for when button is selected and when it is normal
     func setButtonState() {
         //let fontColor = UIColor(red: 211, green: 242, blue: 232, alpha: 1)
         monthBtn.setTitleColor(UIColor(white: 1, alpha: 0.5), for: .normal)
@@ -52,6 +56,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         monthBtn.tintColor = UIColor(white: 0, alpha: 0)
     }
     
+    // action button for week and month button
     @objc func weekMonthPressed(sender:UIButton) {
         let button = sender
         print(button.titleLabel?.text as Any)
@@ -73,7 +78,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     
     // This function handles the http request and passes the jsonarray to processdata
     func populateData(type: String) {
-        let calendar = Calendar(identifier: .gregorian)
         let components = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: today)
         let endday = components.day! + 1
         
@@ -96,64 +100,71 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     // This function uses the data gotten from the HTTP request and sends the correct power array to generate Data entry
     func processData(data: [[String: Any]], type: String) {
         let dayofweek = getDayOfWeek(today)
-        let calendar = Calendar(identifier: .gregorian)
         let range = calendar.range(of: .day, in: .month, for: today)!
         let numDays = range.count
         var powerList = [Double](repeating: 0.0, count: numDays)
+        totalpower = 0
+        
         for x in data {
             let power = x["power"] as? Double
             totalpower += power!
-            
             let dateStr = x["time"] as? String
             let date = dateFormatter.date(from: dateStr!)
             let components = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: date!)
-            powerList[components.day!] += power!
+            powerList[components.day! - 1] += power!
         }
         var finalList = [Double]()
         if type == "THIS WEEK" {
             let components = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: today)
             let startindex = components.day! - dayofweek!
             let endindex = components.day! + 7 - dayofweek! - 1
-            print("The startindex is ", startindex, " the day is ", components.day!, " day of week is ", dayofweek!)
+            print("The startindex is ", startindex, " the day is ", components.day!, " day of week is ", dayofweek!, " the end index is ", endindex)
             finalList = Array<Double>(powerList[startindex...endindex])
         } else {
             finalList = powerList
         }
-        
-        populateBarChart(data: finalList)
+        let maxpower = finalList.max()
+        print("The total power is ", totalpower, " the max power is", maxpower)
+        DispatchQueue.main.async {
+            self.powerlabel.text = String(self.totalpower)
+        }
+        populateBarChart(data: finalList, maxpower: maxpower!)
         
     }
     
-    
+    // gets the day of week
     func getDayOfWeek(_ today: Date) -> Int? {
-        let myCalendar = Calendar(identifier: .gregorian)
-        let weekDay = myCalendar.component(.weekday, from: today)
+        let weekDay = calendar.component(.weekday, from: today)
         return weekDay
     }
     
-    func populateBarChart(data: [Double]) {
-        let dataEntries = generateDataEntries(data: data)
+    func populateBarChart(data: [Double], maxpower: Double) {
+        let dataEntries = generateDataEntries(data: data, maxpower: maxpower)
         DispatchQueue.main.async {
             self.barChart.dataEntries = dataEntries
         }
     }
-    
-    func generateDataEntries(data: [Double]) -> [BarEntry] {
+//     3 4 5 6 7 8 9
+    //                  4
+//     0 1 2 3 4 5 6
+    func generateDataEntries(data: [Double], maxpower: Double) -> [BarEntry] {
         print("THe data gotten for chart is ", data)
         let barColor = #colorLiteral(red: 0.8274509804, green: 0.9490196078, blue: 0.9098039216, alpha: 1)
         var result: [BarEntry] = []
-        for i in 0..<6 {
-            let value = (arc4random() % 80) + 10
+        let formatter = DateFormatter()
+        formatter.dateFormat = "E"
+        let dayofweek = getDayOfWeek(today)
+        for i in 0..<data.count {
+            let components = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: today)
+            let value = (data[i]/maxpower)*80
             let height: Float = Float(value) / 100.0
-            let formatter = DateFormatter()
-            formatter.dateFormat = "d MMM"
-            var date = Date()
-            date.addTimeInterval(TimeInterval(24*60*60 * -i))
-            result.append(BarEntry(color: barColor, height: height, textValue: "\(value)", title: formatter.string(from: date)))
+            
+            let date = Calendar.current.date(byAdding: .day, value: -(components.day! - dayofweek! + 1 + i), to: Date())
+            print("The date is ", date)
+            result.append(BarEntry(color: barColor, height: height, textValue: "\(value)", title: formatter.string(from: date!)))
         }
         return result
     }
-
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // Hide the keyboard
@@ -161,10 +172,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         return true
     }
     
-    
+    //============================
     // All the table view stuff
+    //============================
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        var cellArr = [UITableViewCell]()
         if indexPath.row == 0 {
             let cell =  Bundle.main.loadNibNamed("BillTableViewCell", owner: self, options: nil)?.first as! BillTableViewCell
             cell.billText.text = "$4234"
