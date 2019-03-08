@@ -16,15 +16,19 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     @IBOutlet weak var weekBtn: UIButton!
     @IBOutlet weak var monthBtn: UIButton!
     @IBOutlet weak var powerlabel: UILabel!
-    
-    var baseURL = "https://flask-petal.herokuapp.com/"
+    @IBOutlet weak var nowBtn: UIButton!
+    @IBOutlet weak var kwhlabel: UILabel!
     
     // initializing variables used for date objects
+    var baseURL = "https://flask-petal.herokuapp.com/"
     let dateFormatter = DateFormatter()
     let today = Date()
     let calendar = Calendar(identifier: .gregorian)
     var totalpower: Double = 0.0
     let startdate: String = "03-01-2019-00"
+    var powerCount = [Int]()
+    let repeattask = RepeatingTimer(timeInterval: 5)
+    var livebars: [BarEntry] = []
     
     override func viewDidLoad() {
         print("testing print")
@@ -34,10 +38,14 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         homeTableView.dataSource = self
         homeTableView.allowsSelection = false
         weekBtn.titleLabel?.textColor = UIColor.white
-        weekBtn.addTarget(self, action: #selector(weekMonthPressed), for: .touchUpInside)
-        monthBtn.addTarget(self, action: #selector(weekMonthPressed), for: .touchUpInside)
+        weekBtn.addTarget(self, action: #selector(powerBtnsPressed), for: .touchUpInside)
+        monthBtn.addTarget(self, action: #selector(powerBtnsPressed), for: .touchUpInside)
+        nowBtn.addTarget(self, action: #selector(powerBtnsPressed), for: .touchUpInside)
         // Do any additional setup after loading the view, typically from a nib.
-        setButtonState()
+        initialize()
+        repeattask.eventHandler = {
+            self.getLastMeasurement()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -45,22 +53,68 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         populateData(type: "THIS WEEK")
     }
     
-    // setting the button for when button is selected and when it is normal
-    func setButtonState() {
-        //let fontColor = UIColor(red: 211, green: 242, blue: 232, alpha: 1)
+    func initialize() {
+        // setting the button for when button is selected and when it is normal
         monthBtn.setTitleColor(UIColor(white: 1, alpha: 0.5), for: .normal)
         weekBtn.setTitleColor(UIColor(white: 1, alpha: 0.5), for: .normal)
         monthBtn.setTitleColor(UIColor.white, for: .selected)
         weekBtn.setTitleColor(UIColor.white, for: .selected)
         weekBtn.tintColor = UIColor(white: 0, alpha: 0)
         monthBtn.tintColor = UIColor(white: 0, alpha: 0)
+        nowBtn.setTitleColor(UIColor(white: 1, alpha: 0.5), for: .normal)
+        nowBtn.setTitleColor(UIColor.white, for: .selected)
+        nowBtn.tintColor = UIColor(white: 0, alpha: 0)
+        
+        for _ in 0..<30 {
+            let barColor = UIColor(white: 1, alpha: 0.5)
+            livebars.append(BarEntry(color: barColor, height: 0.025, textValue: "0", title: ""))
+        }
+        
+    }
+    
+    func getLastMeasurement() {
+        let link: String = baseURL + "lastmeasurement"
+        let linkURL = URL(string: link)!
+        let task = URLSession.shared.dataTask(with: linkURL) { (data, response, error) in
+            if error == nil {
+                do {
+                    let jsonresponse = try JSONSerialization.jsonObject(with: data!, options: [])
+                    let json = jsonresponse as! [String: Any]
+                    let data = (json["power"] as! Double)/1000.0
+                    let rounded = Double(round(100*data)/100)
+                    self.updatePwrLabel(data: rounded)
+                    self.updateLiveBars(newValue: rounded)
+                } catch let e{
+                    print("ERROR IS ,", e)
+                }
+            }
+        }
+        task.resume()
+    }
+    
+    func updateLiveBars(newValue: Double) {
+        livebars.removeFirst()
+        let barColor = UIColor(white: 1, alpha: 1)
+        var height = newValue/1.0
+        if height == 0.0 {
+            height = 0.025
+        }
+        livebars.append(BarEntry(color: barColor, height: Float(height), textValue: String(newValue), title: ""))
+        DispatchQueue.main.async {
+            self.barChart.dataEntries = self.livebars
+        }
+    }
+    
+    func updatePwrLabel(data: Double) {
+        DispatchQueue.main.async {
+            self.powerlabel.text = String(data)
+        }
     }
     
     // action button for week and month button
-    @objc func weekMonthPressed(sender:UIButton) {
+    @objc func powerBtnsPressed(sender:UIButton) {
         let button = sender
         print(button.titleLabel?.text as Any)
-        print("the state is ", button.isSelected)
         if !button.isSelected {
             button.isSelected = true
         }
@@ -68,12 +122,27 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         switch button.titleLabel?.text {
         case "THIS WEEK":
             monthBtn.isSelected = false
+            nowBtn.isSelected = false
+            repeattask.suspend()
+            kwhlabel.text = "kWh"
+            populateData(type: (button.titleLabel?.text)!)
         case "MONTH":
             weekBtn.isSelected = false
+            nowBtn.isSelected = false
+            repeattask.suspend()
+            kwhlabel.text = "kWh"
+            populateData(type: (button.titleLabel?.text)!)
+        case "NOW":
+            weekBtn.isSelected = false
+            monthBtn.isSelected = false
+            repeattask.resume()
+            kwhlabel.text = "kW"
         default:
             monthBtn.isSelected = false
+            nowBtn.isSelected = false
+            kwhlabel.text = "kWh"
+            populateData(type: (button.titleLabel?.text)!)
         }
-        populateData(type: (button.titleLabel?.text)!)
     }
     
     // This function handles the http request and passes the jsonarray to processdata
@@ -103,14 +172,22 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         let range = calendar.range(of: .day, in: .month, for: today)!
         let numDays = range.count
         var powerList = [Double](repeating: 0.0, count: numDays)
+        var sum = 0
+        powerCount = [Int](repeating: 0, count: numDays)
+//        var powerHour = [AnyObject]()
+//        var component = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year, Calendar.Component.hour], from: date!)
         totalpower = 0
+        // loop to populate power list and powercount
         for x in data {
-            let power = x["power"] as? Double
-            totalpower += power!
+            let power = ((x["power"] as? Double)!)/1000.0
+            totalpower += power
             let dateStr = x["time"] as? String
             let date = dateFormatter.date(from: dateStr!)
             let components = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: date!)
-            powerList[components.day! - 1] += power!
+            powerList[components.day! - 1] += power
+            powerCount[components.day! - 1] += 1
+            sum += 1
+            
         }
         var finalList = [Double]()
         if type == "THIS WEEK" {
@@ -119,22 +196,20 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
             let endindex = components.day! + 7 - dayofweek! - 1
             print("The startindex is ", startindex, " the day is ", components.day!, " day of week is ", dayofweek!, " the end index is ", endindex)
             finalList = Array<Double>(powerList[startindex...endindex])
+            powerCount = Array<Int>(powerCount[startindex...endindex])
         } else {
             finalList = powerList
         }
         let maxpower = finalList.max()
-        print("The total power is ", totalpower, " the max power is", maxpower!)
-        DispatchQueue.main.async {
-            self.powerlabel.text = String(self.totalpower)
+        print("The total power is ", totalpower/Double(sum), " the max power is", maxpower!)
+        if sum == 0 {
+            sum = 1
         }
+        let pwr = (totalpower)/Double(sum)
+        let roundedPwr = round(100*(pwr)/100)
+        updatePwrLabel(data: roundedPwr)
         populateBarChart(data: finalList, maxpower: maxpower!)
         
-    }
-    
-    // gets the day of week
-    func getDayOfWeek(_ today: Date) -> Int? {
-        let weekDay = calendar.component(.weekday, from: today)
-        return weekDay
     }
     
     func populateBarChart(data: [Double], maxpower: Double) {
@@ -146,20 +221,40 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     
     func generateDataEntries(data: [Double], maxpower: Double) -> [BarEntry] {
         print("THe data gotten for chart is ", data)
-        let barColor = #colorLiteral(red: 0.8274509804, green: 0.9490196078, blue: 0.9098039216, alpha: 1)
+        var barColor = UIColor(white: 1, alpha: 0.5)
         var result: [BarEntry] = []
         let weeklabel = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"]
+        let dayofweek = getDayOfWeek(today)
         
         for i in 0..<data.count {
-            let value = (data[i]/maxpower)*80
-            let height: Float = Float(value) / 100.0
+            var value: Double = 0
+            if powerCount[i] == 0 {
+                powerCount[i] = 1
+            }
+            value = ((data[i]/Double(powerCount[i]))/maxpower)*80
+            var height: Float = Float(value) / 100.0
+            if height == 0 {
+                height += 0.025
+            }
+            var textValue = ""
             var title = ""
             if data.count == 7 {
+                textValue = "\(data[i]/Double(powerCount[i]))"
                 title = weeklabel[i]
             }
-            result.append(BarEntry(color: barColor, height: height, textValue: "\(data[i])", title: title))
+            if i == dayofweek! - 1 {
+                barColor = UIColor.white
+            }
+            result.append(BarEntry(color: barColor, height: height, textValue: textValue, title: title))
+            barColor = UIColor(white: 1, alpha: 0.5)
         }
         return result
+    }
+    
+    // gets the day of week
+    func getDayOfWeek(_ today: Date) -> Int? {
+        let weekDay = calendar.component(.weekday, from: today)
+        return weekDay
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

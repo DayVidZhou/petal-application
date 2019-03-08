@@ -10,9 +10,9 @@ import Foundation
 import UIKit
 
 class BarChart: UIView {
-    
-    let barWidth: CGFloat = 40.0
-    let space: CGFloat = 20.0
+    let screenWidth: CGFloat = UIScreen.main.bounds.width
+    var barWidth: CGFloat = 37.0
+    var space: CGFloat = 20.0
     
     /// space at the bottom of the bar to show the title
     private let bottomSpace: CGFloat = 50.0
@@ -28,10 +28,12 @@ class BarChart: UIView {
             mainLayer.sublayers?.forEach({$0.removeFromSuperlayer()})
             
             if let dataEntries = dataEntries {
+                space = screenWidth / (CGFloat(dataEntries.count)*3.0+1.0)
+                barWidth = space*2
+                
                 scrollView.contentSize = CGSize(width: (barWidth + space)*CGFloat(dataEntries.count), height: self.frame.size.height)
                 //scrollView.contentOffset = CGPoint(x: (barWidth + space)*CGFloat(dataEntries.count) - UIScreen.main.bounds.width, y: 0)
                 mainLayer.frame = CGRect(x: 0, y: 0, width: scrollView.contentSize.width, height: scrollView.contentSize.height)
-                
                 for i in 0..<dataEntries.count {
                     showEntry(index: i, entry: dataEntries[i])
                 }

@@ -20,6 +20,7 @@
 		6E271CA821EFEB720068D410 /* BillTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E271CA621EFEB720068D410 /* BillTableViewCell.xib */; };
 		6E7B48B92208D79100C96BAE /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7B48B82208D79100C96BAE /* BarChart.swift */; };
 		6E7B48BB2208DC2C00C96BAE /* BarEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7B48BA2208DC2C00C96BAE /* BarEntry.swift */; };
+		6EE7F29D2231D60200BB8611 /* RepeatingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE7F29C2231D60200BB8611 /* RepeatingTimer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		6E7B48B82208D79100C96BAE /* BarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChart.swift; sourceTree = "<group>"; };
 		6E7B48BA2208DC2C00C96BAE /* BarEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarEntry.swift; sourceTree = "<group>"; };
 		6E9A7BA5220E343D002E8D91 /* Petal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Petal.entitlements; sourceTree = "<group>"; };
+		6EE7F29C2231D60200BB8611 /* RepeatingTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatingTimer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 				6E271CA121EFEA0B0068D410 /* TipTableViewCell.swift */,
 				6E0F398B21ED439A00FDF987 /* AppDelegate.swift */,
 				6E0F398D21ED439A00FDF987 /* ViewController.swift */,
+				6EE7F29C2231D60200BB8611 /* RepeatingTimer.swift */,
 				6E0F398F21ED439A00FDF987 /* Main.storyboard */,
 				6E7B48B82208D79100C96BAE /* BarChart.swift */,
 				6E7B48BA2208DC2C00C96BAE /* BarEntry.swift */,
@@ -288,6 +291,7 @@
 				6E0F398E21ED439A00FDF987 /* ViewController.swift in Sources */,
 				6E271CA321EFEA0B0068D410 /* TipTableViewCell.swift in Sources */,
 				6E7B48B92208D79100C96BAE /* BarChart.swift in Sources */,
+				6EE7F29D2231D60200BB8611 /* RepeatingTimer.swift in Sources */,
 				6E0F398C21ED439A00FDF987 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

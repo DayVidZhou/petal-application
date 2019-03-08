@@ -19,4 +19,5 @@ struct BarEntry {
     // To be shown at the bottom of the bar
     let title: String
     
+    
 }
