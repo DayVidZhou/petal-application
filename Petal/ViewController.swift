@@ -27,8 +27,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     var totalpower: Double = 0.0
     let startdate: String = "03-01-2019-00"
     var powerCount = [Int]()
-    let repeattask = RepeatingTimer(timeInterval: 5)
+    let repeattask = RepeatingTimer(timeInterval: 3)
     var livebars: [BarEntry] = []
+    
+    var refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         print("testing print")
@@ -41,6 +43,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         weekBtn.addTarget(self, action: #selector(powerBtnsPressed), for: .touchUpInside)
         monthBtn.addTarget(self, action: #selector(powerBtnsPressed), for: .touchUpInside)
         nowBtn.addTarget(self, action: #selector(powerBtnsPressed), for: .touchUpInside)
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
+        barChart.scrollView.addSubview(refreshControl)
         // Do any additional setup after loading the view, typically from a nib.
         initialize()
         repeattask.eventHandler = {
@@ -51,6 +56,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     override func viewDidAppear(_ animated: Bool) {
         dateFormatter.dateFormat = "MM-dd-yyyy-HH"
         populateData(type: "THIS WEEK")
+    }
+    
+    @objc func refresh(sender:AnyObject) {
+        // Code to refresh table view
+        print("refresh this shit")
     }
     
     func initialize() {
@@ -65,9 +75,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         nowBtn.setTitleColor(UIColor.white, for: .selected)
         nowBtn.tintColor = UIColor(white: 0, alpha: 0)
         
+        //initialize bars of 0s
         for _ in 0..<30 {
             let barColor = UIColor(white: 1, alpha: 0.5)
-            livebars.append(BarEntry(color: barColor, height: 0.025, textValue: "0", title: ""))
+            livebars.append(BarEntry(color: barColor, height: 0.025, textValue: "", title: ""))
         }
         
     }
@@ -94,12 +105,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     
     func updateLiveBars(newValue: Double) {
         livebars.removeFirst()
-        let barColor = UIColor(white: 1, alpha: 1)
+        let barColor = UIColor(white: 1, alpha: 0.5)
         var height = newValue/1.0
-        if height == 0.0 {
-            height = 0.025
-        }
-        livebars.append(BarEntry(color: barColor, height: Float(height), textValue: String(newValue), title: ""))
+        height += 0.025
+        livebars.append(BarEntry(color: barColor, height: Float(height), textValue: "", title: ""))
         DispatchQueue.main.async {
             self.barChart.dataEntries = self.livebars
         }
@@ -137,6 +146,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
             monthBtn.isSelected = false
             repeattask.resume()
             kwhlabel.text = "kW"
+            getLastMeasurement()
         default:
             monthBtn.isSelected = false
             nowBtn.isSelected = false
@@ -233,9 +243,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
             }
             value = ((data[i]/Double(powerCount[i]))/maxpower)*80
             var height: Float = Float(value) / 100.0
-            if height == 0 {
-                height += 0.025
-            }
+            height += 0.025
             var textValue = ""
             var title = ""
             if data.count == 7 {

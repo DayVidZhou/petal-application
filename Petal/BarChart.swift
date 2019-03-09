@@ -21,7 +21,7 @@ class BarChart: UIView {
     private let topSpace: CGFloat = 100.0
     
     private let mainLayer: CALayer = CALayer()
-    private let scrollView: UIScrollView = UIScrollView()
+    let scrollView: UIScrollView = UIScrollView()
     
     var dataEntries: [BarEntry]? = nil {
         didSet {
@@ -58,6 +58,8 @@ class BarChart: UIView {
     
     private func setupView() {
         scrollView.layer.addSublayer(mainLayer)
+        scrollView.isScrollEnabled = true
+        scrollView.alwaysBounceVertical = true
         self.addSubview(scrollView)
     }
     
@@ -86,7 +88,7 @@ class BarChart: UIView {
         let barLayer = CALayer()
         barLayer.frame = CGRect(x: xPos, y: yPos, width: barWidth, height: mainLayer.frame.height - bottomSpace - yPos)
         barLayer.backgroundColor = color.cgColor
-        barLayer.cornerRadius = 5
+        barLayer.cornerRadius = 3
         mainLayer.addSublayer(barLayer)
     }
     

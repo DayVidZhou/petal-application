@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zEO-bw-iGc" customClass="BarChart" customModule="Petal" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="121" width="414" height="430"/>
+                                <rect key="frame" x="0.0" y="121" width="414" height="350"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Energy Used" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a0x-NW-cP0">
                                         <rect key="frame" x="158" y="16" width="98" height="23"/>
@@ -65,7 +65,7 @@
                                 <color key="backgroundColor" red="0.11764705882352941" green="0.81960784313725488" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" red="0.92157477139999999" green="0.92155748609999999" blue="0.92156922819999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="430" id="CSt-jz-T0i"/>
+                                    <constraint firstAttribute="height" constant="350" id="CSt-jz-T0i"/>
                                     <constraint firstItem="wjs-GL-flc" firstAttribute="centerX" secondItem="nR1-ui-Mf3" secondAttribute="centerX" id="abj-2b-4gK"/>
                                     <constraint firstItem="wjs-GL-flc" firstAttribute="top" secondItem="a0x-NW-cP0" secondAttribute="bottom" constant="10" id="k3X-Np-wRJ"/>
                                     <constraint firstItem="wjs-GL-flc" firstAttribute="centerX" secondItem="a0x-NW-cP0" secondAttribute="centerX" id="nc1-9e-Ok7"/>
@@ -73,17 +73,6 @@
                                 </constraints>
                                 <viewLayoutGuide key="safeArea" id="nR1-ui-Mf3"/>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DVG-Mh-m7H">
-                                <rect key="frame" x="0.0" y="551" width="414" height="255"/>
-                                <color key="backgroundColor" red="0.92157477140426636" green="0.92155748605728149" blue="0.92156922817230225" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <color key="sectionIndexBackgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <tableView key="tableFooterView" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="lVF-RO-Xed">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="197"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <color key="backgroundColor" red="0.92157477139999999" green="0.92155748609999999" blue="0.92156922819999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                    <color key="sectionIndexBackgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </tableView>
-                            </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tch-h4-LO7">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="121"/>
                                 <subviews>
@@ -132,6 +121,17 @@
                                     <constraint firstAttribute="height" constant="121" id="gLU-3x-RgK"/>
                                 </constraints>
                             </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DVG-Mh-m7H">
+                                <rect key="frame" x="0.0" y="471" width="414" height="335"/>
+                                <color key="backgroundColor" red="0.92157477140426636" green="0.92155748605728149" blue="0.92156922817230225" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="sectionIndexBackgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <tableView key="tableFooterView" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="lVF-RO-Xed">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="197"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" red="0.92157477139999999" green="0.92155748609999999" blue="0.92156922819999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="sectionIndexBackgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </tableView>
+                            </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="36C-kP-mgL" customClass="TabBar">
                                 <rect key="frame" x="0.0" y="806" width="414" height="90"/>
                                 <subviews>
