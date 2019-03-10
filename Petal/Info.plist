@@ -43,7 +43,8 @@
 	</array>
 	<key>UIAppFonts</key>
 	<array>
-		<string></string>
+		<string>G-SemiBold.otf</string>
+		<string>G-Medium.otf</string>
 	</array>
 </dict>
 </plist>

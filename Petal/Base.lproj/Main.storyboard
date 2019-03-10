@@ -9,6 +9,14 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="G-Medium.otf">
+            <string>Gilroy-Medium</string>
+        </array>
+        <array key="G-SemiBold.otf">
+            <string>Gilroy-SemiBold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -19,7 +27,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zEO-bw-iGc" customClass="BarChart" customModule="Petal" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="121" width="375" height="350"/>
+                                <rect key="frame" x="0.0" y="100" width="375" height="350"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Energy Used" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a0x-NW-cP0">
                                         <rect key="frame" x="138.66666666666666" y="16" width="98" height="23"/>
@@ -27,13 +35,13 @@
                                             <constraint firstAttribute="height" constant="23" id="NW0-Uo-PUZ"/>
                                             <constraint firstAttribute="width" constant="98" id="bjO-70-Hg5"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <fontDescription key="fontDescription" name="Gilroy-Medium" family="Gilroy" pointSize="16"/>
                                         <color key="textColor" red="0.82745098039215681" green="0.94901960784313721" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1342.3 kWh" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xcb-JL-Orr">
-                                        <rect key="frame" x="85.666666666666686" y="53" width="204" height="43"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1342.3 kWh" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xcb-JL-Orr">
+                                        <rect key="frame" x="43.666666666666657" y="53" width="288" height="67"/>
+                                        <fontDescription key="fontDescription" name="Gilroy-SemiBold" family="Gilroy" pointSize="56"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -50,37 +58,37 @@
                                 <viewLayoutGuide key="safeArea" id="nR1-ui-Mf3"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tch-h4-LO7">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="121"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pqN-XL-jJP">
-                                        <rect key="frame" x="237" y="86" width="72" height="35"/>
+                                        <rect key="frame" x="237" y="65" width="72" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="72" id="PVf-I9-cLq"/>
                                             <constraint firstAttribute="height" constant="35" id="hYg-aQ-jiJ"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                        <fontDescription key="fontDescription" name="Gilroy-Medium" family="Gilroy" pointSize="16"/>
                                         <state key="normal" title="MONTH">
                                             <color key="titleColor" red="0.82745098039999998" green="0.94901960780000005" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tZd-iu-vEq">
-                                        <rect key="frame" x="142" y="86" width="79" height="35"/>
+                                        <rect key="frame" x="142" y="65" width="79" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="79" id="azi-GA-oX4"/>
                                             <constraint firstAttribute="height" constant="35" id="kNW-UA-dhi"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <fontDescription key="fontDescription" name="Gilroy-Medium" family="Gilroy" pointSize="16"/>
                                         <state key="normal" title="THIS WEEK">
                                             <color key="titleColor" red="0.82745098039999998" green="0.94901960780000005" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GJH-zc-7lU">
-                                        <rect key="frame" x="86" y="86" width="40" height="35"/>
+                                        <rect key="frame" x="86" y="65" width="40" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="FVm-Z2-LDK"/>
                                             <constraint firstAttribute="height" constant="35" id="N1n-qN-VS3"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                        <fontDescription key="fontDescription" name="Gilroy-Medium" family="Gilroy" pointSize="16"/>
                                         <state key="normal" title="NOW">
                                             <color key="titleColor" red="0.82745098039999998" green="0.94901960780000005" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
@@ -94,11 +102,11 @@
                                     <constraint firstItem="tZd-iu-vEq" firstAttribute="centerX" secondItem="Tch-h4-LO7" secondAttribute="centerX" constant="-6" id="Hsv-AH-BkC"/>
                                     <constraint firstItem="pqN-XL-jJP" firstAttribute="leading" secondItem="tZd-iu-vEq" secondAttribute="trailing" constant="16" id="X3W-YU-AuH"/>
                                     <constraint firstItem="tZd-iu-vEq" firstAttribute="leading" secondItem="GJH-zc-7lU" secondAttribute="trailing" constant="16" id="bdt-nQ-QQo"/>
-                                    <constraint firstAttribute="height" constant="121" id="gLU-3x-RgK"/>
+                                    <constraint firstAttribute="height" constant="100" id="gLU-3x-RgK"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DVG-Mh-m7H">
-                                <rect key="frame" x="0.0" y="471" width="375" height="251"/>
+                                <rect key="frame" x="0.0" y="450" width="375" height="272"/>
                                 <color key="backgroundColor" red="0.92157477140426636" green="0.92155748605728149" blue="0.92156922817230225" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="sectionIndexBackgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <tableView key="tableFooterView" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="lVF-RO-Xed">

@@ -140,13 +140,13 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
             monthBtn.isSelected = false
             nowBtn.isSelected = false
             repeattask.suspend()
-            populateData(type: (button.titleLabel?.text)!)
+            checkSavedTime(type: (button.titleLabel?.text)!)
         case "MONTH":
             barLayer.frame = CGRect(x: monthBtn.frame.minX, y: monthBtn.frame.maxY, width: monthBtn.frame.width, height: 4)
             weekBtn.isSelected = false
             nowBtn.isSelected = false
             repeattask.suspend()
-            populateData(type: (button.titleLabel?.text)!)
+            checkSavedTime(type: (button.titleLabel?.text)!)
         case "NOW":
             barLayer.frame = CGRect(x: nowBtn.frame.minX, y: nowBtn.frame.maxY, width: nowBtn.frame.width, height: 4)
             weekBtn.isSelected = false
@@ -165,7 +165,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
             print("power json found")
             let powerSaved = Storage.retrieve("power.json", from: .caches, as: PowerStruct.self)
             let hourLater = calendar.date(byAdding: .hour, value: 1, to: powerSaved.time)
-            if hourLater! > Date() {
+            if hourLater! < Date() {
+                print("ITS been over an hour")
                 populateData(type: type)
             } else {
                 updatePwrLabel(text: String(powerSaved.roundedPwr) + " kWh")
@@ -180,6 +181,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
                 }
             }
         } else {
+            print("power json not found")
             populateData(type: type)
         }
     }
