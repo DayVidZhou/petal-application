@@ -17,7 +17,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     @IBOutlet weak var monthBtn: UIButton!
     @IBOutlet weak var powerlabel: UILabel!
     @IBOutlet weak var nowBtn: UIButton!
-    @IBOutlet weak var kwhlabel: UILabel!
+    @IBOutlet weak var buttonView: UIView!
     
     // initializing variables used for date objects
     var baseURL = "https://flask-petal.herokuapp.com/"
@@ -27,9 +27,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     var totalpower: Double = 0.0
     let startdate: String = "03-01-2019-00"
     var powerCount = [Int]()
+    var powerList = [Double]()
     let repeattask = RepeatingTimer(timeInterval: 3)
     var livebars: [BarEntry] = []
-    
+    var barLayer = CALayer()
     var refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
@@ -39,13 +40,14 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         homeTableView.delegate = self
         homeTableView.dataSource = self
         homeTableView.allowsSelection = false
+        homeTableView.isScrollEnabled = false
         weekBtn.titleLabel?.textColor = UIColor.white
         weekBtn.addTarget(self, action: #selector(powerBtnsPressed), for: .touchUpInside)
         monthBtn.addTarget(self, action: #selector(powerBtnsPressed), for: .touchUpInside)
         nowBtn.addTarget(self, action: #selector(powerBtnsPressed), for: .touchUpInside)
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
-        barChart.scrollView.addSubview(refreshControl)
+//        barChart.scrollView.addSubview(refreshControl)
         // Do any additional setup after loading the view, typically from a nib.
         initialize()
         repeattask.eventHandler = {
@@ -55,7 +57,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     
     override func viewDidAppear(_ animated: Bool) {
         dateFormatter.dateFormat = "MM-dd-yyyy-HH"
-        populateData(type: "THIS WEEK")
+        barLayer.frame = CGRect(x: weekBtn.frame.minX, y: weekBtn.frame.maxY, width: weekBtn.frame.width, height: 4)
+        barLayer.backgroundColor = UIColor.white.cgColor
+        barLayer.cornerRadius = 2
+        buttonView.layer.addSublayer(barLayer)
+        checkSavedTime(type: "THIS WEEK")
     }
     
     @objc func refresh(sender:AnyObject) {
@@ -93,7 +99,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
                     let json = jsonresponse as! [String: Any]
                     let data = (json["power"] as! Double)/1000.0
                     let rounded = Double(round(100*data)/100)
-                    self.updatePwrLabel(data: rounded)
+                    self.updatePwrLabel(text: String(rounded) + " kW")
                     self.updateLiveBars(newValue: rounded)
                 } catch let e{
                     print("ERROR IS ,", e)
@@ -114,9 +120,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         }
     }
     
-    func updatePwrLabel(data: Double) {
+    func updatePwrLabel(text: String) {
         DispatchQueue.main.async {
-            self.powerlabel.text = String(data)
+            self.powerlabel.text = text
         }
     }
     
@@ -130,37 +136,60 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         
         switch button.titleLabel?.text {
         case "THIS WEEK":
+            barLayer.frame = CGRect(x: weekBtn.frame.minX, y: weekBtn.frame.maxY, width: weekBtn.frame.width, height: 4)
             monthBtn.isSelected = false
             nowBtn.isSelected = false
             repeattask.suspend()
-            kwhlabel.text = "kWh"
             populateData(type: (button.titleLabel?.text)!)
         case "MONTH":
+            barLayer.frame = CGRect(x: monthBtn.frame.minX, y: monthBtn.frame.maxY, width: monthBtn.frame.width, height: 4)
             weekBtn.isSelected = false
             nowBtn.isSelected = false
             repeattask.suspend()
-            kwhlabel.text = "kWh"
             populateData(type: (button.titleLabel?.text)!)
         case "NOW":
+            barLayer.frame = CGRect(x: nowBtn.frame.minX, y: nowBtn.frame.maxY, width: nowBtn.frame.width, height: 4)
             weekBtn.isSelected = false
             monthBtn.isSelected = false
             repeattask.resume()
-            kwhlabel.text = "kW"
             getLastMeasurement()
         default:
             monthBtn.isSelected = false
             nowBtn.isSelected = false
-            kwhlabel.text = "kWh"
-            populateData(type: (button.titleLabel?.text)!)
+            checkSavedTime(type: (button.titleLabel?.text)!)
+        }
+    }
+    
+    func checkSavedTime(type: String) {
+        if Storage.fileExists("power.json", in: .caches) {
+            print("power json found")
+            let powerSaved = Storage.retrieve("power.json", from: .caches, as: PowerStruct.self)
+            let hourLater = calendar.date(byAdding: .hour, value: 1, to: powerSaved.time)
+            if hourLater! > Date() {
+                populateData(type: type)
+            } else {
+                updatePwrLabel(text: String(powerSaved.roundedPwr) + " kWh")
+                if type == "THIS WEEK" {
+                    powerCount = powerSaved.weekCount
+                    let maxpower = powerSaved.weekList.max()
+                    populateBarChart(data: powerSaved.weekList, maxpower: maxpower!)
+                } else {
+                    powerCount = powerSaved.monthCount
+                    let maxpower = powerSaved.monthList.max()
+                    populateBarChart(data: powerSaved.monthList, maxpower: maxpower!)
+                }
+            }
+        } else {
+            populateData(type: type)
         }
     }
     
     // This function handles the http request and passes the jsonarray to processdata
     func populateData(type: String) {
-        let components = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: today)
-        let endday = components.day! + 1
+        let components = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year, Calendar.Component.hour], from: today)
+        let tomorrow = components.day! + 1
         
-        let link: String = baseURL + "measurements?start=" + startdate + "&end=03-" + String(endday) + "-2019-00"
+        let link: String = baseURL + "measurements?start=" + startdate + "&end=03-" + String(tomorrow) + "-2019-00"
         let linkURL = URL(string: link)!
         let task = URLSession.shared.dataTask(with: linkURL) { (data, response, error) in
             if error == nil {
@@ -181,7 +210,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         let dayofweek = getDayOfWeek(today)
         let range = calendar.range(of: .day, in: .month, for: today)!
         let numDays = range.count
-        var powerList = [Double](repeating: 0.0, count: numDays)
+        powerList = [Double](repeating: 0.0, count: numDays)
         var sum = 0
         powerCount = [Int](repeating: 0, count: numDays)
 //        var powerHour = [AnyObject]()
@@ -199,27 +228,33 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
             sum += 1
             
         }
-        var finalList = [Double]()
-        if type == "THIS WEEK" {
-            let components = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: today)
-            let startindex = components.day! - dayofweek!
-            let endindex = components.day! + 7 - dayofweek! - 1
-            print("The startindex is ", startindex, " the day is ", components.day!, " day of week is ", dayofweek!, " the end index is ", endindex)
-            finalList = Array<Double>(powerList[startindex...endindex])
-            powerCount = Array<Int>(powerCount[startindex...endindex])
-        } else {
-            finalList = powerList
-        }
-        let maxpower = finalList.max()
-        print("The total power is ", totalpower/Double(sum), " the max power is", maxpower!)
+        
+        var weekList = [Double]()
+        let components = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: today)
+        let startindex = components.day! - dayofweek!
+        let endindex = components.day! + 7 - dayofweek! - 1
+        print("The startindex is ", startindex, " the day is ", components.day!, " day of week is ", dayofweek!, " the end index is ", endindex)
+        weekList = Array<Double>(powerList[startindex...endindex])
+        let weekCount = Array<Int>(powerCount[startindex...endindex])
+        
         if sum == 0 {
             sum = 1
         }
         let pwr = (totalpower)/Double(sum)
         let roundedPwr = round(100*(pwr)/100)
-        updatePwrLabel(data: roundedPwr)
-        populateBarChart(data: finalList, maxpower: maxpower!)
-        
+        let tempPower = PowerStruct(time: Date(), monthList: powerList, monthCount: powerCount, weekList: weekList, weekCount: weekCount, roundedPwr: roundedPwr)
+        Storage.store(tempPower, to: .caches, as: "power.json")
+        updatePwrLabel(text: String(roundedPwr) + " kWh")
+        if type == "THIS WEEK" {
+            powerCount = weekCount
+            let maxpower = weekList.max()
+            print("The total power is ", totalpower/Double(sum), " the max power is", maxpower!)
+            populateBarChart(data: weekList, maxpower: maxpower!)
+        } else {
+            let maxpower = powerList.max()
+            print("The total power is ", totalpower/Double(sum), " the max power is", maxpower!)
+            populateBarChart(data: powerList, maxpower: maxpower!)
+        }
     }
     
     func populateBarChart(data: [Double], maxpower: Double) {

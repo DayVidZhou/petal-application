@@ -20,6 +20,28 @@
 		6E271CA821EFEB720068D410 /* BillTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E271CA621EFEB720068D410 /* BillTableViewCell.xib */; };
 		6E7B48B92208D79100C96BAE /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7B48B82208D79100C96BAE /* BarChart.swift */; };
 		6E7B48BB2208DC2C00C96BAE /* BarEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7B48BA2208DC2C00C96BAE /* BarEntry.swift */; };
+		6E7C93562235B90E007028A5 /* G-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E7C93422235B90D007028A5 /* G-BoldItalic.otf */; };
+		6E7C93572235B90E007028A5 /* G-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E7C93432235B90D007028A5 /* G-ThinItalic.otf */; };
+		6E7C93582235B90E007028A5 /* G-UltraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E7C93442235B90E007028A5 /* G-UltraLight.otf */; };
+		6E7C93592235B90E007028A5 /* G-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E7C93452235B90E007028A5 /* G-Bold.otf */; };
+		6E7C935A2235B90E007028A5 /* G-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E7C93462235B90E007028A5 /* G-Black.otf */; };
+		6E7C935B2235B90E007028A5 /* G-RegularItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E7C93472235B90E007028A5 /* G-RegularItalic.otf */; };
+		6E7C935C2235B90E007028A5 /* G-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E7C93482235B90E007028A5 /* G-BlackItalic.otf */; };
+		6E7C935D2235B90E007028A5 /* G-HeavyItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E7C93492235B90E007028A5 /* G-HeavyItalic.otf */; };
+		6E7C935E2235B90E007028A5 /* G-SemiBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E7C934A2235B90E007028A5 /* G-SemiBoldItalic.otf */; };
+		6E7C935F2235B90E007028A5 /* G-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E7C934B2235B90E007028A5 /* G-Light.otf */; };
+		6E7C93602235B90E007028A5 /* G-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E7C934C2235B90E007028A5 /* G-Thin.otf */; };
+		6E7C93612235B90E007028A5 /* G-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E7C934D2235B90E007028A5 /* G-LightItalic.otf */; };
+		6E7C93622235B90E007028A5 /* G-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E7C934E2235B90E007028A5 /* G-MediumItalic.otf */; };
+		6E7C93632235B90E007028A5 /* G-UltraLightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E7C934F2235B90E007028A5 /* G-UltraLightItalic.otf */; };
+		6E7C93642235B90E007028A5 /* G-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E7C93502235B90E007028A5 /* G-Heavy.otf */; };
+		6E7C93652235B90E007028A5 /* G-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E7C93512235B90E007028A5 /* G-SemiBold.otf */; };
+		6E7C93662235B90E007028A5 /* G-ExtraBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E7C93522235B90E007028A5 /* G-ExtraBoldItalic.otf */; };
+		6E7C93672235B90E007028A5 /* G-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E7C93532235B90E007028A5 /* G-Regular.otf */; };
+		6E7C93682235B90E007028A5 /* G-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E7C93542235B90E007028A5 /* G-Medium.otf */; };
+		6E7C93692235B90E007028A5 /* G-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E7C93552235B90E007028A5 /* G-ExtraBold.otf */; };
+		6E85BBC82235963C001E4BFB /* PowerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E85BBC72235963C001E4BFB /* PowerList.swift */; };
+		6E85BBCA223597FF001E4BFB /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E85BBC9223597FF001E4BFB /* Storage.swift */; };
 		6EE7F29D2231D60200BB8611 /* RepeatingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE7F29C2231D60200BB8611 /* RepeatingTimer.swift */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +82,28 @@
 		6E271CA621EFEB720068D410 /* BillTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BillTableViewCell.xib; sourceTree = "<group>"; };
 		6E7B48B82208D79100C96BAE /* BarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChart.swift; sourceTree = "<group>"; };
 		6E7B48BA2208DC2C00C96BAE /* BarEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarEntry.swift; sourceTree = "<group>"; };
+		6E7C93422235B90D007028A5 /* G-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "G-BoldItalic.otf"; sourceTree = "<group>"; };
+		6E7C93432235B90D007028A5 /* G-ThinItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "G-ThinItalic.otf"; sourceTree = "<group>"; };
+		6E7C93442235B90E007028A5 /* G-UltraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "G-UltraLight.otf"; sourceTree = "<group>"; };
+		6E7C93452235B90E007028A5 /* G-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "G-Bold.otf"; sourceTree = "<group>"; };
+		6E7C93462235B90E007028A5 /* G-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "G-Black.otf"; sourceTree = "<group>"; };
+		6E7C93472235B90E007028A5 /* G-RegularItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "G-RegularItalic.otf"; sourceTree = "<group>"; };
+		6E7C93482235B90E007028A5 /* G-BlackItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "G-BlackItalic.otf"; sourceTree = "<group>"; };
+		6E7C93492235B90E007028A5 /* G-HeavyItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "G-HeavyItalic.otf"; sourceTree = "<group>"; };
+		6E7C934A2235B90E007028A5 /* G-SemiBoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "G-SemiBoldItalic.otf"; sourceTree = "<group>"; };
+		6E7C934B2235B90E007028A5 /* G-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "G-Light.otf"; sourceTree = "<group>"; };
+		6E7C934C2235B90E007028A5 /* G-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "G-Thin.otf"; sourceTree = "<group>"; };
+		6E7C934D2235B90E007028A5 /* G-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "G-LightItalic.otf"; sourceTree = "<group>"; };
+		6E7C934E2235B90E007028A5 /* G-MediumItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "G-MediumItalic.otf"; sourceTree = "<group>"; };
+		6E7C934F2235B90E007028A5 /* G-UltraLightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "G-UltraLightItalic.otf"; sourceTree = "<group>"; };
+		6E7C93502235B90E007028A5 /* G-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "G-Heavy.otf"; sourceTree = "<group>"; };
+		6E7C93512235B90E007028A5 /* G-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "G-SemiBold.otf"; sourceTree = "<group>"; };
+		6E7C93522235B90E007028A5 /* G-ExtraBoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "G-ExtraBoldItalic.otf"; sourceTree = "<group>"; };
+		6E7C93532235B90E007028A5 /* G-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "G-Regular.otf"; sourceTree = "<group>"; };
+		6E7C93542235B90E007028A5 /* G-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "G-Medium.otf"; sourceTree = "<group>"; };
+		6E7C93552235B90E007028A5 /* G-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "G-ExtraBold.otf"; sourceTree = "<group>"; };
+		6E85BBC72235963C001E4BFB /* PowerList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerList.swift; sourceTree = "<group>"; };
+		6E85BBC9223597FF001E4BFB /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		6E9A7BA5220E343D002E8D91 /* Petal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Petal.entitlements; sourceTree = "<group>"; };
 		6EE7F29C2231D60200BB8611 /* RepeatingTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatingTimer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -112,12 +156,14 @@
 		6E0F398A21ED439A00FDF987 /* Petal */ = {
 			isa = PBXGroup;
 			children = (
+				6E7C92F02235B66C007028A5 /* fonts */,
+				6E85BBCB22359811001E4BFB /* helperFiles */,
 				6E9A7BA5220E343D002E8D91 /* Petal.entitlements */,
 				6E271CA221EFEA0B0068D410 /* TipTableViewCell.xib */,
 				6E271CA121EFEA0B0068D410 /* TipTableViewCell.swift */,
 				6E0F398B21ED439A00FDF987 /* AppDelegate.swift */,
 				6E0F398D21ED439A00FDF987 /* ViewController.swift */,
-				6EE7F29C2231D60200BB8611 /* RepeatingTimer.swift */,
+				6E85BBC72235963C001E4BFB /* PowerList.swift */,
 				6E0F398F21ED439A00FDF987 /* Main.storyboard */,
 				6E7B48B82208D79100C96BAE /* BarChart.swift */,
 				6E7B48BA2208DC2C00C96BAE /* BarEntry.swift */,
@@ -146,6 +192,42 @@
 				6E0F39AD21ED439B00FDF987 /* Info.plist */,
 			);
 			path = PetalUITests;
+			sourceTree = "<group>";
+		};
+		6E7C92F02235B66C007028A5 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				6E7C93462235B90E007028A5 /* G-Black.otf */,
+				6E7C93482235B90E007028A5 /* G-BlackItalic.otf */,
+				6E7C93452235B90E007028A5 /* G-Bold.otf */,
+				6E7C93422235B90D007028A5 /* G-BoldItalic.otf */,
+				6E7C93552235B90E007028A5 /* G-ExtraBold.otf */,
+				6E7C93522235B90E007028A5 /* G-ExtraBoldItalic.otf */,
+				6E7C93502235B90E007028A5 /* G-Heavy.otf */,
+				6E7C93492235B90E007028A5 /* G-HeavyItalic.otf */,
+				6E7C934B2235B90E007028A5 /* G-Light.otf */,
+				6E7C934D2235B90E007028A5 /* G-LightItalic.otf */,
+				6E7C93542235B90E007028A5 /* G-Medium.otf */,
+				6E7C934E2235B90E007028A5 /* G-MediumItalic.otf */,
+				6E7C93532235B90E007028A5 /* G-Regular.otf */,
+				6E7C93472235B90E007028A5 /* G-RegularItalic.otf */,
+				6E7C93512235B90E007028A5 /* G-SemiBold.otf */,
+				6E7C934A2235B90E007028A5 /* G-SemiBoldItalic.otf */,
+				6E7C934C2235B90E007028A5 /* G-Thin.otf */,
+				6E7C93432235B90D007028A5 /* G-ThinItalic.otf */,
+				6E7C93442235B90E007028A5 /* G-UltraLight.otf */,
+				6E7C934F2235B90E007028A5 /* G-UltraLightItalic.otf */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
+		6E85BBCB22359811001E4BFB /* helperFiles */ = {
+			isa = PBXGroup;
+			children = (
+				6EE7F29C2231D60200BB8611 /* RepeatingTimer.swift */,
+				6E85BBC9223597FF001E4BFB /* Storage.swift */,
+			);
+			path = helperFiles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,11 +339,31 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E7C93562235B90E007028A5 /* G-BoldItalic.otf in Resources */,
 				6E0F399621ED439B00FDF987 /* LaunchScreen.storyboard in Resources */,
+				6E7C93632235B90E007028A5 /* G-UltraLightItalic.otf in Resources */,
+				6E7C93622235B90E007028A5 /* G-MediumItalic.otf in Resources */,
+				6E7C93592235B90E007028A5 /* G-Bold.otf in Resources */,
+				6E7C93692235B90E007028A5 /* G-ExtraBold.otf in Resources */,
+				6E7C935A2235B90E007028A5 /* G-Black.otf in Resources */,
+				6E7C935F2235B90E007028A5 /* G-Light.otf in Resources */,
 				6E271CA421EFEA0B0068D410 /* TipTableViewCell.xib in Resources */,
+				6E7C93582235B90E007028A5 /* G-UltraLight.otf in Resources */,
 				6E0F399321ED439B00FDF987 /* Assets.xcassets in Resources */,
+				6E7C93602235B90E007028A5 /* G-Thin.otf in Resources */,
+				6E7C93672235B90E007028A5 /* G-Regular.otf in Resources */,
+				6E7C93662235B90E007028A5 /* G-ExtraBoldItalic.otf in Resources */,
+				6E7C93642235B90E007028A5 /* G-Heavy.otf in Resources */,
+				6E7C935B2235B90E007028A5 /* G-RegularItalic.otf in Resources */,
+				6E7C935E2235B90E007028A5 /* G-SemiBoldItalic.otf in Resources */,
+				6E7C93682235B90E007028A5 /* G-Medium.otf in Resources */,
 				6E271CA821EFEB720068D410 /* BillTableViewCell.xib in Resources */,
+				6E7C935D2235B90E007028A5 /* G-HeavyItalic.otf in Resources */,
+				6E7C93612235B90E007028A5 /* G-LightItalic.otf in Resources */,
 				6E0F399121ED439A00FDF987 /* Main.storyboard in Resources */,
+				6E7C93572235B90E007028A5 /* G-ThinItalic.otf in Resources */,
+				6E7C93652235B90E007028A5 /* G-SemiBold.otf in Resources */,
+				6E7C935C2235B90E007028A5 /* G-BlackItalic.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,7 +391,9 @@
 				6E7B48BB2208DC2C00C96BAE /* BarEntry.swift in Sources */,
 				6E271CA721EFEB720068D410 /* BillTableViewCell.swift in Sources */,
 				6E0F398E21ED439A00FDF987 /* ViewController.swift in Sources */,
+				6E85BBC82235963C001E4BFB /* PowerList.swift in Sources */,
 				6E271CA321EFEA0B0068D410 /* TipTableViewCell.swift in Sources */,
+				6E85BBCA223597FF001E4BFB /* Storage.swift in Sources */,
 				6E7B48B92208D79100C96BAE /* BarChart.swift in Sources */,
 				6EE7F29D2231D60200BB8611 /* RepeatingTimer.swift in Sources */,
 				6E0F398C21ED439A00FDF987 /* AppDelegate.swift in Sources */,

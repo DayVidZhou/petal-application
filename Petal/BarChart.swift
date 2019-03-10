@@ -58,8 +58,8 @@ class BarChart: UIView {
     
     private func setupView() {
         scrollView.layer.addSublayer(mainLayer)
-        scrollView.isScrollEnabled = true
-        scrollView.alwaysBounceVertical = true
+//        scrollView.isScrollEnabled = true
+//        scrollView.alwaysBounceVertical = true
         self.addSubview(scrollView)
     }
     
