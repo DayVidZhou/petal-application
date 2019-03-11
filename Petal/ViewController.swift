@@ -29,7 +29,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     let startdate: String = "03-01-2019-00"
     var powerCount = [Int]()
     var powerList = [Double]()
-    let repeattask = RepeatingTimer(timeInterval: 3)
+    let repeattask = RepeatingTimer(timeInterval: 1)
     var livebars: [BarEntry] = []
     var barLayer = CALayer()
     var refreshControl = UIRefreshControl()
