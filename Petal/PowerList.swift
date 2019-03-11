@@ -15,4 +15,5 @@ struct PowerStruct: Codable {
     let weekList: [Double]
     let weekCount: [Int]
     let roundedPwr: Double
+    let price: Double
 }

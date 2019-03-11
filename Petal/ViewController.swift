@@ -17,7 +17,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     @IBOutlet weak var monthBtn: UIButton!
     @IBOutlet weak var powerlabel: UILabel!
     @IBOutlet weak var nowBtn: UIButton!
-    @IBOutlet weak var buttonView: UIView!
+    @IBOutlet weak var mainView: UIView!
     
     // initializing variables used for date objects
     var baseURL = "https://flask-petal.herokuapp.com/"
@@ -53,14 +53,12 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         repeattask.eventHandler = {
             self.getLastMeasurement()
         }
+//        Storage.remove("power.json", from: .caches)
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        barChart.screenWidth = barChart.bounds.width
         dateFormatter.dateFormat = "MM-dd-yyyy-HH"
-        barLayer.frame = CGRect(x: weekBtn.frame.minX, y: weekBtn.frame.maxY, width: weekBtn.frame.width, height: 4)
-        barLayer.backgroundColor = UIColor.white.cgColor
-        barLayer.cornerRadius = 2
-        buttonView.layer.addSublayer(barLayer)
         checkSavedTime(type: "THIS WEEK")
     }
     
@@ -87,6 +85,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
             livebars.append(BarEntry(color: barColor, height: 0.025, textValue: "", title: ""))
         }
         
+        // adding the bar beneath the this week button
+        barLayer.frame = CGRect(x: weekBtn.frame.minX, y: weekBtn.frame.maxY, width: weekBtn.frame.width, height: 4)
+        barLayer.backgroundColor = UIColor.white.cgColor
+        barLayer.cornerRadius = 2
+        mainView.layer.addSublayer(barLayer)
     }
     
     func getLastMeasurement() {
@@ -98,9 +101,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
                     let jsonresponse = try JSONSerialization.jsonObject(with: data!, options: [])
                     let json = jsonresponse as! [String: Any]
                     let data = (json["power"] as! Double)/1000.0
-                    let rounded = Double(round(100*data)/100)
-                    self.updatePwrLabel(text: String(rounded) + " kW")
-                    self.updateLiveBars(newValue: rounded)
+                    self.updatePwrLabel(text: String(format: "%.2f", data) + " kW")
+                    self.updateLiveBars(newValue: data)
                 } catch let e{
                     print("ERROR IS ,", e)
                 }
@@ -117,6 +119,14 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         livebars.append(BarEntry(color: barColor, height: Float(height), textValue: "", title: ""))
         DispatchQueue.main.async {
             self.barChart.dataEntries = self.livebars
+        }
+    }
+    
+    func updateBill(price: Double) {
+        let indexPath = IndexPath(row: 0, section: 0)
+        DispatchQueue.main.async {
+            let cell = self.homeTableView.cellForRow(at: indexPath) as! BillTableViewCell
+            cell.billText.text = "$" + String(format: "%.2f", price)
         }
     }
     
@@ -172,13 +182,12 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
                 updatePwrLabel(text: String(powerSaved.roundedPwr) + " kWh")
                 if type == "THIS WEEK" {
                     powerCount = powerSaved.weekCount
-                    let maxpower = powerSaved.weekList.max()
-                    populateBarChart(data: powerSaved.weekList, maxpower: maxpower!)
+                    populateBarChart(data: powerSaved.weekList)
                 } else {
                     powerCount = powerSaved.monthCount
-                    let maxpower = powerSaved.monthList.max()
-                    populateBarChart(data: powerSaved.monthList, maxpower: maxpower!)
+                    populateBarChart(data: powerSaved.monthList)
                 }
+                updateBill(price: powerSaved.price)
             }
         } else {
             print("power json not found")
@@ -212,83 +221,109 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         let dayofweek = getDayOfWeek(today)
         let range = calendar.range(of: .day, in: .month, for: today)!
         let numDays = range.count
+        print("The num days is ", numDays)
+        var totalPrice: Double = 0.0
+//        var sum = 0
+        let comp = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year, Calendar.Component.hour], from: today)
+        print("The hour is ", comp.hour)
+
+        // these are 2d arrays each array is a day and has 24 length which represents the hours
+        var monthHourUsage = Array(repeating: Array(repeating: 0.0, count: 24), count: numDays)
+        var monthCounter = Array(repeating: Array(repeating: 0, count: 24), count: numDays)
+        
         powerList = [Double](repeating: 0.0, count: numDays)
-        var sum = 0
         powerCount = [Int](repeating: 0, count: numDays)
-//        var powerHour = [AnyObject]()
-//        var component = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year, Calendar.Component.hour], from: date!)
         totalpower = 0
-        // loop to populate power list and powercount
+        
+        // loop to populate month usage and month counter 2D arrays
         for x in data {
             let power = ((x["power"] as? Double)!)/1000.0
-            totalpower += power
             let dateStr = x["time"] as? String
             let date = dateFormatter.date(from: dateStr!)
-            let components = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: date!)
-            powerList[components.day! - 1] += power
-            powerCount[components.day! - 1] += 1
-            sum += 1
-            
+            let tempcomp = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year, Calendar.Component.hour], from: date!)
+            monthHourUsage[tempcomp.day! - 1][tempcomp.hour!] += power
+            monthCounter[tempcomp.day! - 1][tempcomp.hour!] += 1
+            powerCount[tempcomp.day! - 1] += 1
+//            sum += 1
         }
+        // now the daily kwh will be calculated
+        for i in 0..<comp.day! {
+            var powerDay = 0.0
+            for j in 0..<24 {
+                if monthCounter[i][j] != 0 {
+                    powerDay += (monthHourUsage[i][j] / Double(monthCounter[i][j]))
+//                    print("The day is ", i, " the hour is ", j, " the counter is ", monthCounter[i][j], " the usage is ",monthHourUsage[i][j] )
+                    // changing the accumulated kw in the hour to kwh by dividing by the number of samples in that hour
+                    monthHourUsage[i][j] = (monthHourUsage[i][j] / Double(monthCounter[i][j]))
+                }
+            }
+            totalpower += powerDay
+            powerList[i] = powerDay
+        }
+        
+        totalPrice = getPriceForMonth(month: comp.month!, day: comp.day!, usage: monthHourUsage)
+        print("total price is ", totalPrice)
+        updateBill(price: totalPrice)
         
         var weekList = [Double]()
         let components = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: today)
         let startindex = components.day! - dayofweek!
         let endindex = components.day! + 7 - dayofweek! - 1
-        print("The startindex is ", startindex, " the day is ", components.day!, " day of week is ", dayofweek!, " the end index is ", endindex)
+//        print("The startindex is ", startindex, " the day is ", components.day!, " day of week is ", dayofweek!, " the end index is ", endindex)
         weekList = Array<Double>(powerList[startindex...endindex])
         let weekCount = Array<Int>(powerCount[startindex...endindex])
         
-        if sum == 0 {
-            sum = 1
-        }
-        let pwr = (totalpower)/Double(sum)
-        let roundedPwr = round(100*(pwr)/100)
-        let tempPower = PowerStruct(time: Date(), monthList: powerList, monthCount: powerCount, weekList: weekList, weekCount: weekCount, roundedPwr: roundedPwr)
+//        if sum == 0 {
+//            sum = 1
+//        }
+//        let pwr = (totalpower)/Double(sum)
+        let roundedPwr = round(100*(totalpower)/100)
+        let tempPower = PowerStruct(time: Date(), monthList: powerList, monthCount: powerCount, weekList: weekList, weekCount: weekCount, roundedPwr: roundedPwr, price: totalPrice)
         Storage.store(tempPower, to: .caches, as: "power.json")
         updatePwrLabel(text: String(roundedPwr) + " kWh")
         if type == "THIS WEEK" {
             powerCount = weekCount
-            let maxpower = weekList.max()
-            print("The total power is ", totalpower/Double(sum), " the max power is", maxpower!)
-            populateBarChart(data: weekList, maxpower: maxpower!)
+            populateBarChart(data: weekList)
         } else {
-            let maxpower = powerList.max()
-            print("The total power is ", totalpower/Double(sum), " the max power is", maxpower!)
-            populateBarChart(data: powerList, maxpower: maxpower!)
+            populateBarChart(data: powerList)
         }
     }
     
-    func populateBarChart(data: [Double], maxpower: Double) {
-        let dataEntries = generateDataEntries(data: data, maxpower: maxpower)
+    func populateBarChart(data: [Double]) {
+        let dataEntries = generateDataEntries(data: data)
         DispatchQueue.main.async {
             self.barChart.dataEntries = dataEntries
         }
     }
     
-    func generateDataEntries(data: [Double], maxpower: Double) -> [BarEntry] {
+    func generateDataEntries(data: [Double]) -> [BarEntry] {
         print("THe data gotten for chart is ", data)
+        let maxpower = data.max()
         var barColor = UIColor(white: 1, alpha: 0.5)
         var result: [BarEntry] = []
         let weeklabel = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"]
         let dayofweek = getDayOfWeek(today)
-        
+        let components = calendar.dateComponents([Calendar.Component.day], from: today)
         for i in 0..<data.count {
             var value: Double = 0
             if powerCount[i] == 0 {
                 powerCount[i] = 1
             }
-            value = ((data[i]/Double(powerCount[i]))/maxpower)*80
-            var height: Float = Float(value) / 100.0
+            value = (data[i])/maxpower!
+            var height: Float = Float(value)*0.6
             height += 0.025
             var textValue = ""
             var title = ""
             if data.count == 7 {
-                textValue = "\(data[i]/Double(powerCount[i]))"
+                textValue = "\(data[i])"
                 title = weeklabel[i]
-            }
-            if i == dayofweek! - 1 {
-                barColor = UIColor.white
+                if i == dayofweek! - 1 {
+                    barColor = UIColor.white
+                }
+            } else {
+                if i == components.day! - 1 {
+                    barColor = UIColor.white
+                }
             }
             result.append(BarEntry(color: barColor, height: height, textValue: textValue, title: title))
             barColor = UIColor(white: 1, alpha: 0.5)

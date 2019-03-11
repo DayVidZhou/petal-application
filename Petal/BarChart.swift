@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class BarChart: UIView {
-    let screenWidth: CGFloat = UIScreen.main.bounds.width
+    var screenWidth: CGFloat = UIScreen.main.bounds.width
     var barWidth: CGFloat = 37.0
     var space: CGFloat = 20.0
     

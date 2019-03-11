@@ -40,6 +40,7 @@
 		6E7C93672235B90E007028A5 /* G-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E7C93532235B90E007028A5 /* G-Regular.otf */; };
 		6E7C93682235B90E007028A5 /* G-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E7C93542235B90E007028A5 /* G-Medium.otf */; };
 		6E7C93692235B90E007028A5 /* G-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E7C93552235B90E007028A5 /* G-ExtraBold.otf */; };
+		6E7C936B2235C55E007028A5 /* getPriceFor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7C936A2235C55E007028A5 /* getPriceFor.swift */; };
 		6E85BBC82235963C001E4BFB /* PowerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E85BBC72235963C001E4BFB /* PowerList.swift */; };
 		6E85BBCA223597FF001E4BFB /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E85BBC9223597FF001E4BFB /* Storage.swift */; };
 		6EE7F29D2231D60200BB8611 /* RepeatingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE7F29C2231D60200BB8611 /* RepeatingTimer.swift */; };
@@ -102,6 +103,7 @@
 		6E7C93532235B90E007028A5 /* G-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "G-Regular.otf"; sourceTree = "<group>"; };
 		6E7C93542235B90E007028A5 /* G-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "G-Medium.otf"; sourceTree = "<group>"; };
 		6E7C93552235B90E007028A5 /* G-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "G-ExtraBold.otf"; sourceTree = "<group>"; };
+		6E7C936A2235C55E007028A5 /* getPriceFor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getPriceFor.swift; sourceTree = "<group>"; };
 		6E85BBC72235963C001E4BFB /* PowerList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerList.swift; sourceTree = "<group>"; };
 		6E85BBC9223597FF001E4BFB /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		6E9A7BA5220E343D002E8D91 /* Petal.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Petal.entitlements; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 				6E0F399221ED439B00FDF987 /* Assets.xcassets */,
 				6E0F399421ED439B00FDF987 /* LaunchScreen.storyboard */,
 				6E0F399721ED439B00FDF987 /* Info.plist */,
+				6E7C936A2235C55E007028A5 /* getPriceFor.swift */,
 				6E271CA521EFEB720068D410 /* BillTableViewCell.swift */,
 				6E271CA621EFEB720068D410 /* BillTableViewCell.xib */,
 			);
@@ -397,6 +400,7 @@
 				6E7B48B92208D79100C96BAE /* BarChart.swift in Sources */,
 				6EE7F29D2231D60200BB8611 /* RepeatingTimer.swift in Sources */,
 				6E0F398C21ED439A00FDF987 /* AppDelegate.swift in Sources */,
+				6E7C936B2235C55E007028A5 /* getPriceFor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
