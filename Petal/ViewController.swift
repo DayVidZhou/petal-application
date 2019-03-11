@@ -18,6 +18,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     @IBOutlet weak var powerlabel: UILabel!
     @IBOutlet weak var nowBtn: UIButton!
     @IBOutlet weak var mainView: UIView!
+    @IBOutlet weak var kwhLabel: UILabel!
     
     // initializing variables used for date objects
     var baseURL = "https://flask-petal.herokuapp.com/"
@@ -60,6 +61,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         barChart.screenWidth = barChart.bounds.width
         dateFormatter.dateFormat = "MM-dd-yyyy-HH"
         checkSavedTime(type: "THIS WEEK")
+        updatekwhLabel(text: "kWh")
     }
     
     @objc func refresh(sender:AnyObject) {
@@ -101,7 +103,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
                     let jsonresponse = try JSONSerialization.jsonObject(with: data!, options: [])
                     let json = jsonresponse as! [String: Any]
                     let data = (json["power"] as! Double)/1000.0
-                    self.updatePwrLabel(text: String(format: "%.2f", data) + " kW")
+                    self.updatePwrLabel(text: String(format: "%.2f", data))
                     self.updateLiveBars(newValue: data)
                 } catch let e{
                     print("ERROR IS ,", e)
@@ -136,6 +138,12 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         }
     }
     
+    func updatekwhLabel(text: String) {
+        DispatchQueue.main.async {
+            self.kwhLabel.text = text
+        }
+    }
+    
     // action button for week and month button
     @objc func powerBtnsPressed(sender:UIButton) {
         let button = sender
@@ -147,23 +155,27 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         switch button.titleLabel?.text {
         case "THIS WEEK":
             barLayer.frame = CGRect(x: weekBtn.frame.minX, y: weekBtn.frame.maxY, width: weekBtn.frame.width, height: 4)
+            updatekwhLabel(text: "kWh")
             monthBtn.isSelected = false
             nowBtn.isSelected = false
             repeattask.suspend()
             checkSavedTime(type: (button.titleLabel?.text)!)
         case "MONTH":
             barLayer.frame = CGRect(x: monthBtn.frame.minX, y: monthBtn.frame.maxY, width: monthBtn.frame.width, height: 4)
+            updatekwhLabel(text: "kWh")
             weekBtn.isSelected = false
             nowBtn.isSelected = false
             repeattask.suspend()
             checkSavedTime(type: (button.titleLabel?.text)!)
         case "NOW":
             barLayer.frame = CGRect(x: nowBtn.frame.minX, y: nowBtn.frame.maxY, width: nowBtn.frame.width, height: 4)
+            updatekwhLabel(text: "kW")
             weekBtn.isSelected = false
             monthBtn.isSelected = false
             repeattask.resume()
             getLastMeasurement()
         default:
+            updatekwhLabel(text: "kWh")
             monthBtn.isSelected = false
             nowBtn.isSelected = false
             checkSavedTime(type: (button.titleLabel?.text)!)
@@ -173,21 +185,21 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     func checkSavedTime(type: String) {
         if Storage.fileExists("power.json", in: .caches) {
             print("power json found")
-            let powerSaved = Storage.retrieve("power.json", from: .caches, as: PowerStruct.self)
-            let hourLater = calendar.date(byAdding: .hour, value: 1, to: powerSaved.time)
+            let savedPower = Storage.retrieve("power.json", from: .caches, as: PowerStruct.self)
+            let hourLater = calendar.date(byAdding: .hour, value: 1, to: savedPower.time)
             if hourLater! < Date() {
                 print("ITS been over an hour")
                 populateData(type: type)
             } else {
-                updatePwrLabel(text: String(powerSaved.roundedPwr) + " kWh")
+                updatePwrLabel(text: String(savedPower.roundedPwr))
                 if type == "THIS WEEK" {
-                    powerCount = powerSaved.weekCount
-                    populateBarChart(data: powerSaved.weekList)
+                    powerCount = savedPower.weekCount
+                    populateBarChart(data: savedPower.weekList)
                 } else {
-                    powerCount = powerSaved.monthCount
-                    populateBarChart(data: powerSaved.monthList)
+                    powerCount = savedPower.monthCount
+                    populateBarChart(data: savedPower.monthList)
                 }
-                updateBill(price: powerSaved.price)
+                updateBill(price: savedPower.price)
             }
         } else {
             print("power json not found")
@@ -280,7 +292,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         let roundedPwr = round(100*(totalpower)/100)
         let tempPower = PowerStruct(time: Date(), monthList: powerList, monthCount: powerCount, weekList: weekList, weekCount: weekCount, roundedPwr: roundedPwr, price: totalPrice)
         Storage.store(tempPower, to: .caches, as: "power.json")
-        updatePwrLabel(text: String(roundedPwr) + " kWh")
+        updatePwrLabel(text: String(roundedPwr))
         if type == "THIS WEEK" {
             powerCount = weekCount
             populateBarChart(data: weekList)

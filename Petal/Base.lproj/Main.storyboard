@@ -70,9 +70,9 @@
                                 <viewLayoutGuide key="safeArea" id="nR1-ui-Mf3"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pqN-XL-jJP">
-                                <rect key="frame" x="243" y="56" width="72" height="35"/>
+                                <rect key="frame" x="243" y="56" width="56" height="35"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="72" id="PVf-I9-cLq"/>
+                                    <constraint firstAttribute="width" constant="56" id="PVf-I9-cLq"/>
                                     <constraint firstAttribute="height" constant="35" id="hYg-aQ-jiJ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Gilroy-Medium" family="Gilroy" pointSize="16"/>
@@ -177,6 +177,7 @@
                     <connections>
                         <outlet property="barChart" destination="zEO-bw-iGc" id="1om-DO-ukh"/>
                         <outlet property="homeTableView" destination="DVG-Mh-m7H" id="N9t-Pz-zDa"/>
+                        <outlet property="kwhLabel" destination="E1e-P2-KEi" id="CGV-gN-xvQ"/>
                         <outlet property="mainView" destination="8bC-Xf-vdC" id="L3j-Qq-2UL"/>
                         <outlet property="monthBtn" destination="pqN-XL-jJP" id="mLz-sM-wAj"/>
                         <outlet property="nowBtn" destination="GJH-zc-7lU" id="ogi-dC-O4F"/>
