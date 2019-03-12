@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6E0F398C21ED439A00FDF987 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0F398B21ED439A00FDF987 /* AppDelegate.swift */; };
-		6E0F398E21ED439A00FDF987 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0F398D21ED439A00FDF987 /* ViewController.swift */; };
+		6E0F398E21ED439A00FDF987 /* homeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0F398D21ED439A00FDF987 /* homeController.swift */; };
 		6E0F399121ED439A00FDF987 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E0F398F21ED439A00FDF987 /* Main.storyboard */; };
 		6E0F399321ED439B00FDF987 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E0F399221ED439B00FDF987 /* Assets.xcassets */; };
 		6E0F399621ED439B00FDF987 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E0F399421ED439B00FDF987 /* LaunchScreen.storyboard */; };
@@ -18,6 +18,8 @@
 		6E271CA421EFEA0B0068D410 /* TipTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E271CA221EFEA0B0068D410 /* TipTableViewCell.xib */; };
 		6E271CA721EFEB720068D410 /* BillTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E271CA521EFEB720068D410 /* BillTableViewCell.swift */; };
 		6E271CA821EFEB720068D410 /* BillTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E271CA621EFEB720068D410 /* BillTableViewCell.xib */; };
+		6E6BE58D223834010052014B /* AppliancesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6BE58C223834010052014B /* AppliancesController.swift */; };
+		6E6BE58F223856700052014B /* ApplianceViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6BE58E223856700052014B /* ApplianceViewCell.swift */; };
 		6E7B48B92208D79100C96BAE /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7B48B82208D79100C96BAE /* BarChart.swift */; };
 		6E7B48BB2208DC2C00C96BAE /* BarEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7B48BA2208DC2C00C96BAE /* BarEntry.swift */; };
 		6E7C93562235B90E007028A5 /* G-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E7C93422235B90D007028A5 /* G-BoldItalic.otf */; };
@@ -66,7 +68,7 @@
 /* Begin PBXFileReference section */
 		6E0F398821ED439A00FDF987 /* Petal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Petal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E0F398B21ED439A00FDF987 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		6E0F398D21ED439A00FDF987 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		6E0F398D21ED439A00FDF987 /* homeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = homeController.swift; sourceTree = "<group>"; };
 		6E0F399021ED439A00FDF987 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6E0F399221ED439B00FDF987 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6E0F399521ED439B00FDF987 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -81,6 +83,8 @@
 		6E271CA221EFEA0B0068D410 /* TipTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TipTableViewCell.xib; sourceTree = "<group>"; };
 		6E271CA521EFEB720068D410 /* BillTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillTableViewCell.swift; sourceTree = "<group>"; };
 		6E271CA621EFEB720068D410 /* BillTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BillTableViewCell.xib; sourceTree = "<group>"; };
+		6E6BE58C223834010052014B /* AppliancesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppliancesController.swift; sourceTree = "<group>"; };
+		6E6BE58E223856700052014B /* ApplianceViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplianceViewCell.swift; sourceTree = "<group>"; };
 		6E7B48B82208D79100C96BAE /* BarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChart.swift; sourceTree = "<group>"; };
 		6E7B48BA2208DC2C00C96BAE /* BarEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarEntry.swift; sourceTree = "<group>"; };
 		6E7C93422235B90D007028A5 /* G-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "G-BoldItalic.otf"; sourceTree = "<group>"; };
@@ -158,13 +162,14 @@
 		6E0F398A21ED439A00FDF987 /* Petal */ = {
 			isa = PBXGroup;
 			children = (
+				6E6BE587223830600052014B /* appliances */,
 				6E7C92F02235B66C007028A5 /* fonts */,
 				6E85BBCB22359811001E4BFB /* helperFiles */,
 				6E9A7BA5220E343D002E8D91 /* Petal.entitlements */,
 				6E271CA221EFEA0B0068D410 /* TipTableViewCell.xib */,
 				6E271CA121EFEA0B0068D410 /* TipTableViewCell.swift */,
 				6E0F398B21ED439A00FDF987 /* AppDelegate.swift */,
-				6E0F398D21ED439A00FDF987 /* ViewController.swift */,
+				6E0F398D21ED439A00FDF987 /* homeController.swift */,
 				6E85BBC72235963C001E4BFB /* PowerList.swift */,
 				6E0F398F21ED439A00FDF987 /* Main.storyboard */,
 				6E7B48B82208D79100C96BAE /* BarChart.swift */,
@@ -195,6 +200,15 @@
 				6E0F39AD21ED439B00FDF987 /* Info.plist */,
 			);
 			path = PetalUITests;
+			sourceTree = "<group>";
+		};
+		6E6BE587223830600052014B /* appliances */ = {
+			isa = PBXGroup;
+			children = (
+				6E6BE58C223834010052014B /* AppliancesController.swift */,
+				6E6BE58E223856700052014B /* ApplianceViewCell.swift */,
+			);
+			path = appliances;
 			sourceTree = "<group>";
 		};
 		6E7C92F02235B66C007028A5 /* fonts */ = {
@@ -393,13 +407,15 @@
 			files = (
 				6E7B48BB2208DC2C00C96BAE /* BarEntry.swift in Sources */,
 				6E271CA721EFEB720068D410 /* BillTableViewCell.swift in Sources */,
-				6E0F398E21ED439A00FDF987 /* ViewController.swift in Sources */,
+				6E0F398E21ED439A00FDF987 /* homeController.swift in Sources */,
 				6E85BBC82235963C001E4BFB /* PowerList.swift in Sources */,
 				6E271CA321EFEA0B0068D410 /* TipTableViewCell.swift in Sources */,
 				6E85BBCA223597FF001E4BFB /* Storage.swift in Sources */,
+				6E6BE58F223856700052014B /* ApplianceViewCell.swift in Sources */,
 				6E7B48B92208D79100C96BAE /* BarChart.swift in Sources */,
 				6EE7F29D2231D60200BB8611 /* RepeatingTimer.swift in Sources */,
 				6E0F398C21ED439A00FDF987 /* AppDelegate.swift in Sources */,
+				6E6BE58D223834010052014B /* AppliancesController.swift in Sources */,
 				6E7C936B2235C55E007028A5 /* getPriceFor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

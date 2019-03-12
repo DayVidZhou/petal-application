@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
+class homeController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
 
     
     @IBOutlet weak var barChart: BarChart!
@@ -40,8 +40,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         // Handle the text field’s user input through delegate callbacks.
         homeTableView.delegate = self
         homeTableView.dataSource = self
-        homeTableView.allowsSelection = false
-        homeTableView.isScrollEnabled = false
         weekBtn.titleLabel?.textColor = UIColor.white
         weekBtn.addTarget(self, action: #selector(powerBtnsPressed), for: .touchUpInside)
         monthBtn.addTarget(self, action: #selector(powerBtnsPressed), for: .touchUpInside)
@@ -62,6 +60,12 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         dateFormatter.dateFormat = "MM-dd-yyyy-HH"
         checkSavedTime(type: "THIS WEEK")
         updatekwhLabel(text: "kWh")
+        
+        // adding the bar beneath the this week button
+        barLayer.frame = CGRect(x: weekBtn.frame.minX, y: weekBtn.frame.maxY, width: weekBtn.frame.width, height: 4)
+        barLayer.backgroundColor = UIColor.white.cgColor
+        barLayer.cornerRadius = 2
+        mainView.layer.addSublayer(barLayer)
     }
     
     @objc func refresh(sender:AnyObject) {
@@ -86,12 +90,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
             let barColor = UIColor(white: 1, alpha: 0.5)
             livebars.append(BarEntry(color: barColor, height: 0.025, textValue: "", title: ""))
         }
-        
-        // adding the bar beneath the this week button
-        barLayer.frame = CGRect(x: weekBtn.frame.minX, y: weekBtn.frame.maxY, width: weekBtn.frame.width, height: 4)
-        barLayer.backgroundColor = UIColor.white.cgColor
-        barLayer.cornerRadius = 2
-        mainView.layer.addSublayer(barLayer)
     }
     
     func getLastMeasurement() {
@@ -364,12 +362,14 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
             cell.billText.text = "$4234"
             cell.pointsText.text = "123"
             cell.layer.borderWidth = CGFloat(10)
+//            cell.layer.cornerRadius = 15
             cell.layer.borderColor = tableView.backgroundColor?.cgColor
             return cell
         } else {
             let cell =
             Bundle.main.loadNibNamed("TipTableViewCell", owner: self, options: nil)?.first as! TipTableViewCell
             cell.layer.borderWidth = CGFloat(10)
+//            cell.layer.cornerRadius = 15
             cell.layer.borderColor = tableView.backgroundColor?.cgColor
             return cell
             
