@@ -30,13 +30,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zEO-bw-iGc" customClass="BarChart" customModule="Petal" customModuleProvider="target">
-                                <rect key="frame" x="15" y="91" width="345" height="371"/>
+                                <rect key="frame" x="15" y="83" width="345" height="371"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Energy Used" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a0x-NW-cP0">
-                                        <rect key="frame" x="123.66666666666666" y="38" width="98" height="23"/>
+                                        <rect key="frame" x="97.666666666666686" y="38" width="150" height="23"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="23" id="NW0-Uo-PUZ"/>
-                                            <constraint firstAttribute="width" constant="98" id="bjO-70-Hg5"/>
+                                            <constraint firstAttribute="width" constant="150" id="bjO-70-Hg5"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Gilroy-Medium" family="Gilroy" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -72,59 +72,71 @@
                                 </constraints>
                                 <viewLayoutGuide key="safeArea" id="nR1-ui-Mf3"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pqN-XL-jJP">
-                                <rect key="frame" x="243" y="56" width="56" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="56" id="PVf-I9-cLq"/>
-                                    <constraint firstAttribute="height" constant="35" id="hYg-aQ-jiJ"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Gilroy-Medium" family="Gilroy" pointSize="16"/>
-                                <state key="normal" title="MONTH">
-                                    <color key="titleColor" red="0.82745098039999998" green="0.94901960780000005" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tZd-iu-vEq">
-                                <rect key="frame" x="148" y="56" width="79" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="79" id="azi-GA-oX4"/>
-                                    <constraint firstAttribute="height" constant="35" id="kNW-UA-dhi"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Gilroy-Medium" family="Gilroy" pointSize="16"/>
-                                <state key="normal" title="THIS WEEK">
-                                    <color key="titleColor" red="0.82745098039999998" green="0.94901960780000005" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GJH-zc-7lU">
-                                <rect key="frame" x="92" y="56" width="40" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="40" id="FVm-Z2-LDK"/>
-                                    <constraint firstAttribute="height" constant="35" id="N1n-qN-VS3"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Gilroy-Medium" family="Gilroy" pointSize="16"/>
-                                <state key="normal" title="NOW">
-                                    <color key="titleColor" red="0.82745098039999998" green="0.94901960780000005" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                            </button>
                             <tableView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DVG-Mh-m7H">
-                                <rect key="frame" x="0.0" y="462" width="375" height="267"/>
+                                <rect key="frame" x="0.0" y="454" width="375" height="275"/>
                                 <color key="backgroundColor" red="0.93333333330000001" green="0.94117647059999998" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="sectionIndexBackgroundColor" red="0.93333333330000001" green="0.94117647059999998" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2aF-eb-Xwy">
+                                <rect key="frame" x="49" y="44" width="278" height="39"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pqN-XL-jJP">
+                                        <rect key="frame" x="185" y="4" width="93" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="93" id="PVf-I9-cLq"/>
+                                            <constraint firstAttribute="height" constant="35" id="hYg-aQ-jiJ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Gilroy-Medium" family="Gilroy" pointSize="16"/>
+                                        <state key="normal" title="THIS MONTH">
+                                            <color key="titleColor" red="0.82745098039999998" green="0.94901960780000005" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tZd-iu-vEq">
+                                        <rect key="frame" x="72.666666666666671" y="4" width="79.000000000000014" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="79" id="azi-GA-oX4"/>
+                                            <constraint firstAttribute="height" constant="35" id="kNW-UA-dhi"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Gilroy-Medium" family="Gilroy" pointSize="16"/>
+                                        <state key="normal" title="THIS WEEK">
+                                            <color key="titleColor" red="0.82745098039999998" green="0.94901960780000005" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GJH-zc-7lU">
+                                        <rect key="frame" x="0.0" y="4" width="40" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="FVm-Z2-LDK"/>
+                                            <constraint firstAttribute="height" constant="35" id="N1n-qN-VS3"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Gilroy-Medium" family="Gilroy" pointSize="16"/>
+                                        <state key="normal" title="NOW">
+                                            <color key="titleColor" red="0.82745098039999998" green="0.94901960780000005" blue="0.90980392160000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="278" id="1dB-P5-e1l"/>
+                                    <constraint firstItem="GJH-zc-7lU" firstAttribute="leading" secondItem="2aF-eb-Xwy" secondAttribute="leading" id="KBC-jv-1U8"/>
+                                    <constraint firstAttribute="bottom" secondItem="GJH-zc-7lU" secondAttribute="bottom" id="KEw-PN-ko7"/>
+                                    <constraint firstAttribute="trailing" secondItem="pqN-XL-jJP" secondAttribute="trailing" id="Luw-6F-Qcb"/>
+                                    <constraint firstAttribute="bottom" secondItem="pqN-XL-jJP" secondAttribute="bottom" id="Otm-a1-Gxf"/>
+                                    <constraint firstItem="tZd-iu-vEq" firstAttribute="leading" secondItem="GJH-zc-7lU" secondAttribute="trailing" constant="32.5" id="dyf-tQ-4TX"/>
+                                    <constraint firstAttribute="bottom" secondItem="tZd-iu-vEq" secondAttribute="bottom" id="s5d-s2-jbG"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.1176470588" green="0.81960784310000001" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="pqN-XL-jJP" firstAttribute="leading" secondItem="tZd-iu-vEq" secondAttribute="trailing" constant="16" id="34p-iS-kxi"/>
-                            <constraint firstItem="tZd-iu-vEq" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="9py-fk-IRd"/>
-                            <constraint firstItem="tZd-iu-vEq" firstAttribute="leading" secondItem="GJH-zc-7lU" secondAttribute="trailing" constant="16" id="EGM-e1-khs"/>
+                            <constraint firstItem="2aF-eb-Xwy" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="49" id="6TC-2P-0O4"/>
                             <constraint firstItem="DVG-Mh-m7H" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="K44-5Z-8Ar"/>
                             <constraint firstItem="zEO-bw-iGc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="L67-ZQ-D8Y"/>
-                            <constraint firstItem="tZd-iu-vEq" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="12" id="M6b-Cd-0ET"/>
-                            <constraint firstItem="zEO-bw-iGc" firstAttribute="top" secondItem="tZd-iu-vEq" secondAttribute="bottom" id="PY8-zE-GrQ"/>
-                            <constraint firstItem="GJH-zc-7lU" firstAttribute="firstBaseline" secondItem="tZd-iu-vEq" secondAttribute="baseline" id="S3F-Pq-HV6"/>
                             <constraint firstItem="DVG-Mh-m7H" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Znv-GQ-DVj"/>
-                            <constraint firstItem="pqN-XL-jJP" firstAttribute="firstBaseline" secondItem="tZd-iu-vEq" secondAttribute="firstBaseline" id="iXm-Fx-Yz0"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="top" secondItem="2aF-eb-Xwy" secondAttribute="top" id="asd-Zi-9tX"/>
+                            <constraint firstItem="zEO-bw-iGc" firstAttribute="top" secondItem="2aF-eb-Xwy" secondAttribute="bottom" id="kAn-xe-3Vz"/>
                             <constraint firstItem="zEO-bw-iGc" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-15" id="kkV-pN-d9V"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="DVG-Mh-m7H" secondAttribute="bottom" id="tBC-wK-nL1"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="top" secondItem="2aF-eb-Xwy" secondAttribute="bottom" constant="-39" id="thu-qW-3DX"/>
                             <constraint firstItem="zEO-bw-iGc" firstAttribute="bottom" secondItem="DVG-Mh-m7H" secondAttribute="top" id="yFO-WP-Ii7"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -134,6 +146,7 @@
                     </tabBarItem>
                     <connections>
                         <outlet property="barChart" destination="zEO-bw-iGc" id="1om-DO-ukh"/>
+                        <outlet property="energyUsedLabel" destination="a0x-NW-cP0" id="HuG-c2-Wnv"/>
                         <outlet property="homeTableView" destination="DVG-Mh-m7H" id="N9t-Pz-zDa"/>
                         <outlet property="kwhLabel" destination="E1e-P2-KEi" id="CGV-gN-xvQ"/>
                         <outlet property="mainView" destination="8bC-Xf-vdC" id="L3j-Qq-2UL"/>
@@ -145,7 +158,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1956.521739130435" y="133.25892857142856"/>
+            <point key="canvasLocation" x="2480.8000000000002" y="73.891625615763544"/>
         </scene>
         <!--Appliances Controller-->
         <scene sceneID="aN5-fr-xxS">

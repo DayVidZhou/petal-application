@@ -19,6 +19,7 @@ class homeController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     @IBOutlet weak var nowBtn: UIButton!
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var kwhLabel: UILabel!
+    @IBOutlet weak var energyUsedLabel: UILabel!
     
     // initializing variables used for date objects
     var baseURL = "https://flask-petal.herokuapp.com/"
@@ -62,7 +63,7 @@ class homeController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         updatekwhLabel(text: "kWh")
         
         // adding the bar beneath the this week button
-        barLayer.frame = CGRect(x: weekBtn.frame.minX, y: weekBtn.frame.maxY, width: weekBtn.frame.width, height: 4)
+        barLayer.frame = CGRect(x: weekBtn.frame.minX+49.5, y: weekBtn.frame.maxY+43, width: weekBtn.frame.width, height: 4)
         barLayer.backgroundColor = UIColor.white.cgColor
         barLayer.cornerRadius = 2
         mainView.layer.addSublayer(barLayer)
@@ -152,28 +153,32 @@ class homeController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         
         switch button.titleLabel?.text {
         case "THIS WEEK":
-            barLayer.frame = CGRect(x: weekBtn.frame.minX, y: weekBtn.frame.maxY, width: weekBtn.frame.width, height: 4)
+            barLayer.frame = CGRect(x: weekBtn.frame.minX+49.5, y: weekBtn.frame.maxY+43, width: weekBtn.frame.width, height: 4)
             updatekwhLabel(text: "kWh")
+            energyUsedLabel.text = "Energy Used"
             monthBtn.isSelected = false
             nowBtn.isSelected = false
             repeattask.suspend()
             checkSavedTime(type: (button.titleLabel?.text)!)
-        case "MONTH":
-            barLayer.frame = CGRect(x: monthBtn.frame.minX, y: monthBtn.frame.maxY, width: monthBtn.frame.width, height: 4)
+        case "THIS MONTH":
+            barLayer.frame = CGRect(x: monthBtn.frame.minX+49.5, y: monthBtn.frame.maxY+43, width: monthBtn.frame.width, height: 4)
             updatekwhLabel(text: "kWh")
+            energyUsedLabel.text = "Energy Used"
             weekBtn.isSelected = false
             nowBtn.isSelected = false
             repeattask.suspend()
             checkSavedTime(type: (button.titleLabel?.text)!)
         case "NOW":
-            barLayer.frame = CGRect(x: nowBtn.frame.minX, y: nowBtn.frame.maxY, width: nowBtn.frame.width, height: 4)
+            barLayer.frame = CGRect(x: nowBtn.frame.minX+49.5, y: nowBtn.frame.maxY+43, width: nowBtn.frame.width, height: 4)
             updatekwhLabel(text: "kW")
+            energyUsedLabel.text = "Currently Using"
             weekBtn.isSelected = false
             monthBtn.isSelected = false
             repeattask.resume()
             getLastMeasurement()
         default:
             updatekwhLabel(text: "kWh")
+            energyUsedLabel.text = "Energy Used"
             monthBtn.isSelected = false
             nowBtn.isSelected = false
             checkSavedTime(type: (button.titleLabel?.text)!)
