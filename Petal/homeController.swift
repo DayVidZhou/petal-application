@@ -62,11 +62,7 @@ class homeController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         checkSavedTime(type: "THIS WEEK")
         updatekwhLabel(text: "kWh")
         
-        // adding the bar beneath the this week button
-        barLayer.frame = CGRect(x: weekBtn.frame.minX+49.5, y: weekBtn.frame.maxY+43, width: weekBtn.frame.width, height: 4)
-        barLayer.backgroundColor = UIColor.white.cgColor
-        barLayer.cornerRadius = 2
-        mainView.layer.addSublayer(barLayer)
+        
     }
     
     @objc func refresh(sender:AnyObject) {
@@ -91,6 +87,18 @@ class homeController: UIViewController, UITextFieldDelegate, UITableViewDelegate
             let barColor = UIColor(white: 1, alpha: 0.5)
             livebars.append(BarEntry(color: barColor, height: 0.025, textValue: "", title: ""))
         }
+        
+        // adding the bar beneath the selected button
+        barLayer.backgroundColor = UIColor.white.cgColor
+        barLayer.cornerRadius = 2
+        if weekBtn.isSelected {
+            barLayer.frame = CGRect(x: weekBtn.frame.minX+49.5, y: weekBtn.frame.maxY+43, width: weekBtn.frame.width, height: 4)
+        } else if monthBtn.isSelected {
+            barLayer.frame = CGRect(x: monthBtn.frame.minX+49.5, y: monthBtn.frame.maxY+43, width: monthBtn.frame.width, height: 4)
+        } else {
+            barLayer.frame = CGRect(x: nowBtn.frame.minX+49.5, y: nowBtn.frame.maxY+43, width: monthBtn.frame.width, height: 4)
+        }
+        mainView.layer.addSublayer(barLayer)
     }
     
     func getLastMeasurement() {
@@ -101,7 +109,8 @@ class homeController: UIViewController, UITextFieldDelegate, UITableViewDelegate
                 do {
                     let jsonresponse = try JSONSerialization.jsonObject(with: data!, options: [])
                     let json = jsonresponse as! [String: Any]
-                    let data = (json["power"] as! Double)/1000.0
+                    let data = (json["power"] as! Double)
+//                    print("The data is ", data)
                     self.updatePwrLabel(text: String(format: "%.2f", data))
                     self.updateLiveBars(newValue: data)
                 } catch let e{
@@ -115,7 +124,7 @@ class homeController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     func updateLiveBars(newValue: Double) {
         livebars.removeFirst()
         let barColor = UIColor(white: 1, alpha: 0.5)
-        var height = newValue/1.0
+        var height = newValue/1000
         height += 0.025
         livebars.append(BarEntry(color: barColor, height: Float(height), textValue: "", title: ""))
         DispatchQueue.main.async {
@@ -170,7 +179,7 @@ class homeController: UIViewController, UITextFieldDelegate, UITableViewDelegate
             checkSavedTime(type: (button.titleLabel?.text)!)
         case "NOW":
             barLayer.frame = CGRect(x: nowBtn.frame.minX+49.5, y: nowBtn.frame.maxY+43, width: nowBtn.frame.width, height: 4)
-            updatekwhLabel(text: "kW")
+            updatekwhLabel(text: "W")
             energyUsedLabel.text = "Currently Using"
             weekBtn.isSelected = false
             monthBtn.isSelected = false
@@ -238,7 +247,6 @@ class homeController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         let numDays = range.count
         print("The num days is ", numDays)
         var totalPrice: Double = 0.0
-//        var sum = 0
         let comp = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year, Calendar.Component.hour], from: today)
         print("The hour is ", comp.hour)
 
@@ -259,7 +267,6 @@ class homeController: UIViewController, UITextFieldDelegate, UITableViewDelegate
             monthHourUsage[tempcomp.day! - 1][tempcomp.hour!] += power
             monthCounter[tempcomp.day! - 1][tempcomp.hour!] += 1
             powerCount[tempcomp.day! - 1] += 1
-//            sum += 1
         }
         // now the daily kwh will be calculated
         for i in 0..<comp.day! {
@@ -288,10 +295,6 @@ class homeController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         weekList = Array<Double>(powerList[startindex...endindex])
         let weekCount = Array<Int>(powerCount[startindex...endindex])
         
-//        if sum == 0 {
-//            sum = 1
-//        }
-//        let pwr = (totalpower)/Double(sum)
         let roundedPwr = round(100*(totalpower)/100)
         let tempPower = PowerStruct(time: Date(), monthList: powerList, monthCount: powerCount, weekList: weekList, weekCount: weekCount, roundedPwr: roundedPwr, price: totalPrice)
         Storage.store(tempPower, to: .caches, as: "power.json")
@@ -321,9 +324,9 @@ class homeController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         let components = calendar.dateComponents([Calendar.Component.day], from: today)
         for i in 0..<data.count {
             var value: Double = 0
-            if powerCount[i] == 0 {
-                powerCount[i] = 1
-            }
+//            if powerCount[i] == 0 {
+//                powerCount[i] = 1
+//            }
             value = (data[i])/maxpower!
             var height: Float = Float(value)*0.6
             height += 0.025
