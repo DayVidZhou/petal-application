@@ -12,6 +12,8 @@ class TipTableViewCell: UITableViewCell {
 
     @IBOutlet weak var tipText: UILabel!
     @IBOutlet weak var tipImage: UIImageView!
+    @IBOutlet weak var linkbtn: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -22,5 +24,4 @@ class TipTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
 }

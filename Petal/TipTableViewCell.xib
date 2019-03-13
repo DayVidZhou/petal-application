@@ -46,21 +46,29 @@
                         <color key="textColor" red="0.59999999999999998" green="0.60392156862745094" blue="0.62745098039215685" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fw6-EX-bAh">
+                        <rect key="frame" x="0.0" y="0.0" width="369" height="131.5"/>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="qEP-vA-NeT" firstAttribute="leading" secondItem="J5K-7t-hRe" secondAttribute="leading" id="Akw-lT-0G3"/>
+                    <constraint firstItem="Fw6-EX-bAh" firstAttribute="height" secondItem="H2p-sc-9uM" secondAttribute="height" id="An2-3i-eCd"/>
                     <constraint firstAttribute="trailing" secondItem="ncB-ad-XU1" secondAttribute="trailing" constant="15" id="I5E-ML-iW2"/>
+                    <constraint firstItem="Fw6-EX-bAh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="K5H-yX-O94"/>
+                    <constraint firstItem="Fw6-EX-bAh" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" id="O6p-Ta-p9a"/>
                     <constraint firstAttribute="bottomMargin" secondItem="qEP-vA-NeT" secondAttribute="bottom" constant="15" id="XnZ-bt-zud"/>
                     <constraint firstItem="qEP-vA-NeT" firstAttribute="top" secondItem="J5K-7t-hRe" secondAttribute="bottom" constant="10" id="Xx5-nB-cMo"/>
                     <constraint firstItem="ncB-ad-XU1" firstAttribute="leading" secondItem="qEP-vA-NeT" secondAttribute="trailing" constant="60" id="bjH-Du-2sz"/>
                     <constraint firstItem="J5K-7t-hRe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="15" id="dLE-8t-edY"/>
                     <constraint firstItem="J5K-7t-hRe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="15" id="khW-SY-edt"/>
                     <constraint firstItem="ncB-ad-XU1" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottom" id="men-IC-rD9"/>
+                    <constraint firstItem="Fw6-EX-bAh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="s1N-Uo-Tk8"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="linkbtn" destination="Fw6-EX-bAh" id="gyE-V1-wq2"/>
                 <outlet property="tipImage" destination="ncB-ad-XU1" id="3qB-yo-3If"/>
                 <outlet property="tipText" destination="qEP-vA-NeT" id="n8w-cf-usD"/>
             </connections>

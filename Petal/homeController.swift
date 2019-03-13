@@ -5,7 +5,7 @@
 //  Created by David Zhou on 2019-01-14.
 //  Copyright © 2019 David Zhou. All rights reserved.
 //
-
+import SafariServices
 import UIKit
 
 class homeController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
@@ -34,6 +34,9 @@ class homeController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     var livebars: [BarEntry] = []
     var barLayer = CALayer()
     var refreshControl = UIRefreshControl()
+//    override func loadView() {
+//        view = webView
+//    }
     
     override func viewDidLoad() {
         print("testing print")
@@ -164,7 +167,7 @@ class homeController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         case "THIS WEEK":
             barLayer.frame = CGRect(x: weekBtn.frame.minX+49.5, y: weekBtn.frame.maxY+43, width: weekBtn.frame.width, height: 4)
             updatekwhLabel(text: "kWh")
-            energyUsedLabel.text = "Energy Used"
+            energyUsedLabel.text = "Energy used"
             monthBtn.isSelected = false
             nowBtn.isSelected = false
             repeattask.suspend()
@@ -172,7 +175,7 @@ class homeController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         case "THIS MONTH":
             barLayer.frame = CGRect(x: monthBtn.frame.minX+49.5, y: monthBtn.frame.maxY+43, width: monthBtn.frame.width, height: 4)
             updatekwhLabel(text: "kWh")
-            energyUsedLabel.text = "Energy Used"
+            energyUsedLabel.text = "Energy used"
             weekBtn.isSelected = false
             nowBtn.isSelected = false
             repeattask.suspend()
@@ -180,7 +183,7 @@ class homeController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         case "NOW":
             barLayer.frame = CGRect(x: nowBtn.frame.minX+49.5, y: nowBtn.frame.maxY+43, width: nowBtn.frame.width, height: 4)
             updatekwhLabel(text: "W")
-            energyUsedLabel.text = "Currently Using"
+            energyUsedLabel.text = "Currently using"
             weekBtn.isSelected = false
             monthBtn.isSelected = false
             repeattask.resume()
@@ -198,12 +201,12 @@ class homeController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         if Storage.fileExists("power.json", in: .caches) {
             print("power json found")
             let savedPower = Storage.retrieve("power.json", from: .caches, as: PowerStruct.self)
-            let hourLater = calendar.date(byAdding: .hour, value: 1, to: savedPower.time)
+            let hourLater = calendar.date(byAdding: .minute, value: 1, to: savedPower.time)
             if hourLater! < Date() {
                 print("ITS been over an hour")
                 populateData(type: type)
             } else {
-                updatePwrLabel(text: String(savedPower.roundedPwr))
+                updatePwrLabel(text: String(format: "%.2f", savedPower.roundedPwr))
                 if type == "THIS WEEK" {
                     powerCount = savedPower.weekCount
                     populateBarChart(data: savedPower.weekList)
@@ -295,10 +298,10 @@ class homeController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         weekList = Array<Double>(powerList[startindex...endindex])
         let weekCount = Array<Int>(powerCount[startindex...endindex])
         
-        let roundedPwr = round(100*(totalpower)/100)
+        let roundedPwr = totalpower
         let tempPower = PowerStruct(time: Date(), monthList: powerList, monthCount: powerCount, weekList: weekList, weekCount: weekCount, roundedPwr: roundedPwr, price: totalPrice)
         Storage.store(tempPower, to: .caches, as: "power.json")
-        updatePwrLabel(text: String(roundedPwr))
+        updatePwrLabel(text: String(format: "%.2f", roundedPwr))
         if type == "THIS WEEK" {
             powerCount = weekCount
             populateBarChart(data: weekList)
@@ -372,18 +375,28 @@ class homeController: UIViewController, UITextFieldDelegate, UITableViewDelegate
             cell.layer.borderWidth = CGFloat(10)
 //            cell.layer.cornerRadius = 15
             cell.layer.borderColor = tableView.backgroundColor?.cgColor
+            cell.isUserInteractionEnabled = false
             return cell
         } else {
             let cell =
             Bundle.main.loadNibNamed("TipTableViewCell", owner: self, options: nil)?.first as! TipTableViewCell
             cell.layer.borderWidth = CGFloat(10)
 //            cell.layer.cornerRadius = 15
+            cell.selectionStyle = .none
             cell.layer.borderColor = tableView.backgroundColor?.cgColor
             return cell
             
         }
     }
-
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 1 {
+            let url = URL(string: "https://www.redenergy.com.au/living-energy/energy-saving/how-to-save-on-your-laundry-energy-bills")
+            let safariVC = SFSafariViewController(url: url!)
+            present(safariVC, animated: true)
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
     }
