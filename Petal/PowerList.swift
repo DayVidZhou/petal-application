@@ -11,9 +11,8 @@ import Foundation
 struct PowerStruct: Codable {
     let time: Date
     let monthList: [Double]
-    let monthCount: [Int]
+    let monthPwr: Double
     let weekList: [Double]
-    let weekCount: [Int]
-    let roundedPwr: Double
+    let weekPwr: Double
     let price: Double
 }

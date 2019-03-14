@@ -30,7 +30,7 @@ class homeController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     let startdate: String = "03-01-2019-00"
     var powerCount = [Int]()
     var powerList = [Double]()
-    let repeattask = RepeatingTimer(timeInterval: 1)
+    let repeattask = RepeatingTimer(timeInterval: 2)
     var livebars: [BarEntry] = []
     var barLayer = CALayer()
     var refreshControl = UIRefreshControl()
@@ -39,7 +39,7 @@ class homeController: UIViewController, UITextFieldDelegate, UITableViewDelegate
 //    }
     
     override func viewDidLoad() {
-        print("testing print")
+//        Storage.remove("power.json", from: .caches)
         super.viewDidLoad()
         // Handle the text field’s user input through delegate callbacks.
         homeTableView.delegate = self
@@ -56,16 +56,11 @@ class homeController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         repeattask.eventHandler = {
             self.getLastMeasurement()
         }
-//        Storage.remove("power.json", from: .caches)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         barChart.screenWidth = barChart.bounds.width
         dateFormatter.dateFormat = "MM-dd-yyyy-HH"
-        checkSavedTime(type: "THIS WEEK")
-        updatekwhLabel(text: "kWh")
-        
-        
     }
     
     @objc func refresh(sender:AnyObject) {
@@ -95,11 +90,21 @@ class homeController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         barLayer.backgroundColor = UIColor.white.cgColor
         barLayer.cornerRadius = 2
         if weekBtn.isSelected {
+            updatekwhLabel(text: "kWh")
             barLayer.frame = CGRect(x: weekBtn.frame.minX+49.5, y: weekBtn.frame.maxY+43, width: weekBtn.frame.width, height: 4)
+            checkSavedTime(type: "THIS WEEK")
+            energyUsedLabel.text = "Energy used"
         } else if monthBtn.isSelected {
+            updatekwhLabel(text: "kWh")
             barLayer.frame = CGRect(x: monthBtn.frame.minX+49.5, y: monthBtn.frame.maxY+43, width: monthBtn.frame.width, height: 4)
+            checkSavedTime(type: "THIS MONTH")
+            energyUsedLabel.text = "Energy used"
         } else {
+            updatekwhLabel(text: "W")
             barLayer.frame = CGRect(x: nowBtn.frame.minX+49.5, y: nowBtn.frame.maxY+43, width: monthBtn.frame.width, height: 4)
+            repeattask.resume()
+            getLastMeasurement()
+            energyUsedLabel.text = "Currently using"
         }
         mainView.layer.addSublayer(barLayer)
     }
@@ -206,13 +211,12 @@ class homeController: UIViewController, UITextFieldDelegate, UITableViewDelegate
                 print("ITS been over an hour")
                 populateData(type: type)
             } else {
-                updatePwrLabel(text: String(format: "%.2f", savedPower.roundedPwr))
                 if type == "THIS WEEK" {
-                    powerCount = savedPower.weekCount
                     populateBarChart(data: savedPower.weekList)
+                    updatePwrLabel(text: String(format: "%.2f", savedPower.weekPwr))
                 } else {
-                    powerCount = savedPower.monthCount
                     populateBarChart(data: savedPower.monthList)
+                    updatePwrLabel(text: String(format: "%.2f", savedPower.monthPwr))
                 }
                 updateBill(price: savedPower.price)
             }
@@ -248,7 +252,6 @@ class homeController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         let dayofweek = getDayOfWeek(today)
         let range = calendar.range(of: .day, in: .month, for: today)!
         let numDays = range.count
-        print("The num days is ", numDays)
         var totalPrice: Double = 0.0
         let comp = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year, Calendar.Component.hour], from: today)
         print("The hour is ", comp.hour)
@@ -271,6 +274,7 @@ class homeController: UIViewController, UITextFieldDelegate, UITableViewDelegate
             monthCounter[tempcomp.day! - 1][tempcomp.hour!] += 1
             powerCount[tempcomp.day! - 1] += 1
         }
+        
         // now the daily kwh will be calculated
         for i in 0..<comp.day! {
             var powerDay = 0.0
@@ -296,17 +300,16 @@ class homeController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         let endindex = components.day! + 7 - dayofweek! - 1
 //        print("The startindex is ", startindex, " the day is ", components.day!, " day of week is ", dayofweek!, " the end index is ", endindex)
         weekList = Array<Double>(powerList[startindex...endindex])
-        let weekCount = Array<Int>(powerCount[startindex...endindex])
-        
+        let weekPwr = weekList.reduce(0, +)
         let roundedPwr = totalpower
-        let tempPower = PowerStruct(time: Date(), monthList: powerList, monthCount: powerCount, weekList: weekList, weekCount: weekCount, roundedPwr: roundedPwr, price: totalPrice)
+        let tempPower = PowerStruct(time: Date(), monthList: powerList, monthPwr: totalpower, weekList: weekList, weekPwr: weekPwr, price: totalPrice)
         Storage.store(tempPower, to: .caches, as: "power.json")
-        updatePwrLabel(text: String(format: "%.2f", roundedPwr))
         if type == "THIS WEEK" {
-            powerCount = weekCount
             populateBarChart(data: weekList)
+            updatePwrLabel(text: String(format: "%.2f", weekPwr))
         } else {
             populateBarChart(data: powerList)
+            updatePwrLabel(text: String(format: "%.2f", roundedPwr))
         }
     }
     
@@ -327,16 +330,14 @@ class homeController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         let components = calendar.dateComponents([Calendar.Component.day], from: today)
         for i in 0..<data.count {
             var value: Double = 0
-//            if powerCount[i] == 0 {
-//                powerCount[i] = 1
-//            }
             value = (data[i])/maxpower!
             var height: Float = Float(value)*0.6
             height += 0.025
             var textValue = ""
             var title = ""
             if data.count == 7 {
-                textValue = "\(data[i])"
+                //\(data[i])
+                textValue = ""
                 title = weeklabel[i]
                 if i == dayofweek! - 1 {
                     barColor = UIColor.white
@@ -382,6 +383,7 @@ class homeController: UIViewController, UITextFieldDelegate, UITableViewDelegate
             Bundle.main.loadNibNamed("TipTableViewCell", owner: self, options: nil)?.first as! TipTableViewCell
             cell.layer.borderWidth = CGFloat(10)
 //            cell.layer.cornerRadius = 15
+            cell.isUserInteractionEnabled = true
             cell.selectionStyle = .none
             cell.layer.borderColor = tableView.backgroundColor?.cgColor
             return cell
