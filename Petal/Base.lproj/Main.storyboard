@@ -158,7 +158,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2480.8000000000002" y="73.891625615763544"/>
+            <point key="canvasLocation" x="1956" y="132"/>
         </scene>
         <!--Appliances Controller-->
         <scene sceneID="aN5-fr-xxS">
@@ -341,14 +341,79 @@
             </objects>
             <point key="canvasLocation" x="1068" y="132"/>
         </scene>
-        <!--View Controller-->
+        <!--Setting View Controller-->
         <scene sceneID="Kf1-s4-Zgd">
             <objects>
-                <viewController id="iUK-nU-SDF" sceneMemberID="viewController">
+                <viewController id="iUK-nU-SDF" customClass="SettingViewController" customModule="Petal" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jhf-un-bfC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="729"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aZl-Ll-U8D">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Useful Stuff" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0gR-60-3xa">
+                                        <rect key="frame" x="16" y="68" width="180" height="42"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="42" id="TJe-Ml-IRw"/>
+                                            <constraint firstAttribute="width" constant="180" id="oV5-IA-79q"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Gilroy-Bold" family="Gilroy" pointSize="34"/>
+                                        <color key="textColor" red="0.1137254902" green="0.1333333333" blue="0.23137254900000001" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="0gR-60-3xa" firstAttribute="leading" secondItem="aZl-Ll-U8D" secondAttribute="leading" constant="16" id="3Tn-bh-hsK"/>
+                                    <constraint firstAttribute="bottom" secondItem="0gR-60-3xa" secondAttribute="bottom" constant="10" id="LES-9g-Ci8"/>
+                                    <constraint firstAttribute="height" constant="120" id="jgX-gV-4Bp"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c0H-lC-KSr">
+                                <rect key="frame" x="16" y="140" width="150" height="44"/>
+                                <color key="backgroundColor" red="0.1176470588" green="0.81960784310000001" blue="0.54901960780000003" alpha="0.084733518835616445" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="TWa-WP-Sw1"/>
+                                    <constraint firstAttribute="height" constant="44" id="oGX-B6-FVv"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Gilroy-SemiBold" family="Gilroy" pointSize="16"/>
+                                <state key="normal" title="Delete Appliances">
+                                    <color key="titleColor" red="0.1176470588" green="0.81960784310000001" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="deleteAppliancePressed:" destination="iUK-nU-SDF" eventType="touchUpInside" id="sGN-04-nLb"/>
+                                    <action selector="scanForAppliances:" destination="pQJ-OK-g6c" eventType="touchUpInside" id="m08-td-Rss"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zBg-9T-MiD">
+                                <rect key="frame" x="16" y="200" width="150" height="44"/>
+                                <color key="backgroundColor" red="0.1176470588" green="0.81960784310000001" blue="0.54901960780000003" alpha="0.084733518839999994" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="EIj-HR-FGA"/>
+                                    <constraint firstAttribute="height" constant="44" id="gl1-LK-w2q"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Gilroy-SemiBold" family="Gilroy" pointSize="16"/>
+                                <state key="normal" title="Delete Cache">
+                                    <color key="titleColor" red="0.1176470588" green="0.81960784310000001" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="deleteCachePressed:" destination="iUK-nU-SDF" eventType="touchUpInside" id="PiR-Us-Rdb"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="6Oi-oX-mxF" firstAttribute="trailing" secondItem="aZl-Ll-U8D" secondAttribute="trailing" id="4pY-mA-Fwc"/>
+                            <constraint firstItem="aZl-Ll-U8D" firstAttribute="centerX" secondItem="6Oi-oX-mxF" secondAttribute="centerX" id="CsV-HS-ZZB"/>
+                            <constraint firstItem="c0H-lC-KSr" firstAttribute="top" secondItem="aZl-Ll-U8D" secondAttribute="bottom" constant="20" id="RYr-5Q-Eyu"/>
+                            <constraint firstItem="zBg-9T-MiD" firstAttribute="top" secondItem="c0H-lC-KSr" secondAttribute="bottom" constant="16" id="TQi-ZU-dyJ"/>
+                            <constraint firstItem="c0H-lC-KSr" firstAttribute="leading" secondItem="6Oi-oX-mxF" secondAttribute="leading" constant="16" id="k7K-uL-Efj"/>
+                            <constraint firstItem="zBg-9T-MiD" firstAttribute="leading" secondItem="c0H-lC-KSr" secondAttribute="leading" id="mqU-sN-KVI"/>
+                            <constraint firstItem="6Oi-oX-mxF" firstAttribute="top" secondItem="aZl-Ll-U8D" secondAttribute="top" constant="44" id="tsn-xe-mvZ"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Oi-oX-mxF"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="icon-settings" id="Ipz-RM-0dh">
@@ -357,7 +422,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uuE-mB-3Fq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1068" y="884"/>
+            <point key="canvasLocation" x="1068" y="883.74384236453204"/>
         </scene>
     </scenes>
     <resources>

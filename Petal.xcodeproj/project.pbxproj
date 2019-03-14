@@ -18,6 +18,7 @@
 		6E271CA421EFEA0B0068D410 /* TipTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E271CA221EFEA0B0068D410 /* TipTableViewCell.xib */; };
 		6E271CA721EFEB720068D410 /* BillTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E271CA521EFEB720068D410 /* BillTableViewCell.swift */; };
 		6E271CA821EFEB720068D410 /* BillTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E271CA621EFEB720068D410 /* BillTableViewCell.xib */; };
+		6E2F8A98223A19C100D514AB /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2F8A97223A19C100D514AB /* SettingViewController.swift */; };
 		6E6BE58D223834010052014B /* AppliancesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6BE58C223834010052014B /* AppliancesController.swift */; };
 		6E6BE58F223856700052014B /* ApplianceViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6BE58E223856700052014B /* ApplianceViewCell.swift */; };
 		6E7B48B92208D79100C96BAE /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7B48B82208D79100C96BAE /* BarChart.swift */; };
@@ -83,6 +84,7 @@
 		6E271CA221EFEA0B0068D410 /* TipTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TipTableViewCell.xib; sourceTree = "<group>"; };
 		6E271CA521EFEB720068D410 /* BillTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillTableViewCell.swift; sourceTree = "<group>"; };
 		6E271CA621EFEB720068D410 /* BillTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BillTableViewCell.xib; sourceTree = "<group>"; };
+		6E2F8A97223A19C100D514AB /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		6E6BE58C223834010052014B /* AppliancesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppliancesController.swift; sourceTree = "<group>"; };
 		6E6BE58E223856700052014B /* ApplianceViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplianceViewCell.swift; sourceTree = "<group>"; };
 		6E7B48B82208D79100C96BAE /* BarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChart.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 				6E0F398B21ED439A00FDF987 /* AppDelegate.swift */,
 				6E0F398D21ED439A00FDF987 /* homeController.swift */,
 				6E85BBC72235963C001E4BFB /* PowerList.swift */,
+				6E2F8A97223A19C100D514AB /* SettingViewController.swift */,
 				6E0F398F21ED439A00FDF987 /* Main.storyboard */,
 				6E7B48B82208D79100C96BAE /* BarChart.swift */,
 				6E7B48BA2208DC2C00C96BAE /* BarEntry.swift */,
@@ -408,6 +411,7 @@
 				6E7B48BB2208DC2C00C96BAE /* BarEntry.swift in Sources */,
 				6E271CA721EFEB720068D410 /* BillTableViewCell.swift in Sources */,
 				6E0F398E21ED439A00FDF987 /* homeController.swift in Sources */,
+				6E2F8A98223A19C100D514AB /* SettingViewController.swift in Sources */,
 				6E85BBC82235963C001E4BFB /* PowerList.swift in Sources */,
 				6E271CA321EFEA0B0068D410 /* TipTableViewCell.swift in Sources */,
 				6E85BBCA223597FF001E4BFB /* Storage.swift in Sources */,
