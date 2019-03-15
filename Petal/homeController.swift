@@ -39,7 +39,7 @@ class homeController: UIViewController, UITextFieldDelegate, UITableViewDelegate
 //    }
     
     override func viewDidLoad() {
-//        Storage.remove("power.json", from: .caches)
+        Storage.remove("power.json", from: .caches)
         super.viewDidLoad()
         // Handle the text field’s user input through delegate callbacks.
         homeTableView.delegate = self
@@ -58,6 +58,10 @@ class homeController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     
     override func viewWillAppear(_ animated: Bool) {
         initialize()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        repeattask.suspend()
     }
     
     override func viewDidAppear(_ animated: Bool) {
