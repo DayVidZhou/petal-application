@@ -24,11 +24,7 @@ class AppliancesController: UIViewController, UITableViewDelegate, UITableViewDa
     private let refreshControl = UIRefreshControl()
     let baseURL = "https://flask-petal.herokuapp.com/"
     
-    var appliances: [Appliance] = [
-        Appliance(appliance: "Blender", image: UIImage(named: "blender")!, power: 52.0, duration: 10),
-        Appliance(appliance: "Hair iron", image: UIImage(named: "hairiron")!, power: 52.0, duration: 10),
-        Appliance(appliance: "Heater fan", image: UIImage(named: "heater")!, power: 52.0, duration: 10)
-    ]
+    var appliances: [Appliance] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()

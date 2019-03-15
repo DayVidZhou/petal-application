@@ -48,8 +48,6 @@ class homeController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         weekBtn.addTarget(self, action: #selector(powerBtnsPressed), for: .touchUpInside)
         monthBtn.addTarget(self, action: #selector(powerBtnsPressed), for: .touchUpInside)
         nowBtn.addTarget(self, action: #selector(powerBtnsPressed), for: .touchUpInside)
-        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        refreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
 //        barChart.scrollView.addSubview(refreshControl)
         // Do any additional setup after loading the view, typically from a nib.
         initialize()
@@ -58,14 +56,13 @@ class homeController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        initialize()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         barChart.screenWidth = barChart.bounds.width
         dateFormatter.dateFormat = "MM-dd-yyyy-HH"
-    }
-    
-    @objc func refresh(sender:AnyObject) {
-        // Code to refresh table view
-        print("refresh this shit")
     }
     
     func initialize() {
@@ -81,10 +78,12 @@ class homeController: UIViewController, UITextFieldDelegate, UITableViewDelegate
         nowBtn.tintColor = UIColor(white: 0, alpha: 0)
         
         //initialize bars of 0s
+        var temp = [BarEntry]()
         for _ in 0..<30 {
             let barColor = UIColor(white: 1, alpha: 0.5)
-            livebars.append(BarEntry(color: barColor, height: 0.025, textValue: "", title: ""))
+            temp.append(BarEntry(color: barColor, height: 0.025, textValue: "", title: ""))
         }
+        livebars = temp
         
         // adding the bar beneath the selected button
         barLayer.backgroundColor = UIColor.white.cgColor
@@ -93,15 +92,17 @@ class homeController: UIViewController, UITextFieldDelegate, UITableViewDelegate
             updatekwhLabel(text: "kWh")
             barLayer.frame = CGRect(x: weekBtn.frame.minX+49.5, y: weekBtn.frame.maxY+43, width: weekBtn.frame.width, height: 4)
             checkSavedTime(type: "THIS WEEK")
+            repeattask.suspend()
             energyUsedLabel.text = "Energy used"
         } else if monthBtn.isSelected {
             updatekwhLabel(text: "kWh")
             barLayer.frame = CGRect(x: monthBtn.frame.minX+49.5, y: monthBtn.frame.maxY+43, width: monthBtn.frame.width, height: 4)
             checkSavedTime(type: "THIS MONTH")
+            repeattask.suspend()
             energyUsedLabel.text = "Energy used"
         } else {
             updatekwhLabel(text: "W")
-            barLayer.frame = CGRect(x: nowBtn.frame.minX+49.5, y: nowBtn.frame.maxY+43, width: monthBtn.frame.width, height: 4)
+            barLayer.frame = CGRect(x: nowBtn.frame.minX+49.5, y: nowBtn.frame.maxY+43, width: nowBtn.frame.width, height: 4)
             repeattask.resume()
             getLastMeasurement()
             energyUsedLabel.text = "Currently using"

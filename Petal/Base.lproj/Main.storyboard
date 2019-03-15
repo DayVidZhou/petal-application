@@ -42,14 +42,14 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1342.3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xcb-JL-Orr">
-                                        <rect key="frame" x="104.66666666666667" y="57" width="135.66666666666663" height="57.333333333333343"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xcb-JL-Orr">
+                                        <rect key="frame" x="157" y="57" width="31" height="58"/>
                                         <fontDescription key="fontDescription" name="Gilroy-SemiBold" family="Gilroy" pointSize="48"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="kWh" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E1e-P2-KEi">
-                                        <rect key="frame" x="156" y="122.33333333333334" width="33" height="19"/>
+                                        <rect key="frame" x="156" y="123" width="33" height="19"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="33" id="2NA-xT-N0a"/>
                                             <constraint firstAttribute="height" constant="19" id="Q7p-99-flx"/>
@@ -199,13 +199,14 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="120" id="2Wp-B7-rK0"/>
+                                    <constraint firstAttribute="bottom" secondItem="hHH-7l-FfJ" secondAttribute="bottom" constant="10" id="QfQ-hn-aa7"/>
                                     <constraint firstItem="hHH-7l-FfJ" firstAttribute="leading" secondItem="m5F-qy-jgV" secondAttribute="leading" constant="16" id="asE-zh-sIh"/>
                                     <constraint firstItem="qSR-ko-Ize" firstAttribute="centerY" secondItem="hHH-7l-FfJ" secondAttribute="centerY" id="crK-qu-Kyw"/>
                                     <constraint firstAttribute="trailing" secondItem="qSR-ko-Ize" secondAttribute="trailing" constant="26" id="t7T-W4-B0K"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lmR-eL-zRE">
-                                <rect key="frame" x="0.0" y="120" width="375" height="609"/>
+                                <rect key="frame" x="0.0" y="130" width="375" height="599"/>
                                 <color key="backgroundColor" red="0.93333333333333335" green="0.94117647058823528" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="sectionIndexBackgroundColor" red="0.93333333330000001" green="0.94117647059999998" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <prototypes>
@@ -232,13 +233,13 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Blender" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HSZ-VA-oGW">
-                                                    <rect key="frame" x="91" y="35" width="78" height="26"/>
+                                                    <rect key="frame" x="91" y="35" width="76.333333333333314" height="26"/>
                                                     <fontDescription key="fontDescription" name="Gilroy-Medium" family="Gilroy" pointSize="22"/>
                                                     <color key="textColor" red="0.1137254902" green="0.1333333333" blue="0.23137254900000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Used for 16 min" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9dG-xg-fvY">
-                                                    <rect key="frame" x="91" y="65" width="82" height="15.333333333333329"/>
+                                                    <rect key="frame" x="91" y="65" width="85.666666666666686" height="14"/>
                                                     <fontDescription key="fontDescription" name="Gilroy-Medium" family="Gilroy" pointSize="12"/>
                                                     <color key="textColor" red="0.59999999999999998" green="0.60392156860000001" blue="0.62745098040000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -253,7 +254,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wh" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KeA-Q4-U5h">
-                                                    <rect key="frame" x="319" y="46.333333333333336" width="30" height="26.000000000000007"/>
+                                                    <rect key="frame" x="319" y="46.666666666666664" width="30" height="25.999999999999993"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="30" id="GNc-uA-11J"/>
                                                         <constraint firstAttribute="height" constant="26" id="ZFq-v5-EWI"/>
@@ -294,15 +295,14 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.93333333330000001" green="0.94117647059999998" blue="0.96078431369999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="lmR-eL-zRE" firstAttribute="top" secondItem="hHH-7l-FfJ" secondAttribute="bottom" constant="10" id="EUU-x4-rgu"/>
                             <constraint firstItem="s0N-6h-mBo" firstAttribute="top" secondItem="m5F-qy-jgV" secondAttribute="top" constant="44" id="THi-qs-4AH"/>
                             <constraint firstItem="s0N-6h-mBo" firstAttribute="trailing" secondItem="m5F-qy-jgV" secondAttribute="trailing" id="Ufc-4l-YW6"/>
                             <constraint firstItem="m5F-qy-jgV" firstAttribute="leading" secondItem="s0N-6h-mBo" secondAttribute="leading" id="WXv-Ga-G35"/>
                             <constraint firstItem="s0N-6h-mBo" firstAttribute="bottom" secondItem="lmR-eL-zRE" secondAttribute="bottom" id="Y8D-Bm-AKV"/>
                             <constraint firstItem="lmR-eL-zRE" firstAttribute="leading" secondItem="s0N-6h-mBo" secondAttribute="leading" id="ZYl-al-rbp"/>
-                            <constraint firstItem="lmR-eL-zRE" firstAttribute="top" secondItem="m5F-qy-jgV" secondAttribute="bottom" id="oB7-H7-4bX"/>
+                            <constraint firstItem="lmR-eL-zRE" firstAttribute="top" secondItem="m5F-qy-jgV" secondAttribute="bottom" constant="10" id="oB7-H7-4bX"/>
                             <constraint firstItem="s0N-6h-mBo" firstAttribute="trailing" secondItem="lmR-eL-zRE" secondAttribute="trailing" id="y4x-J5-YIP"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="s0N-6h-mBo"/>
@@ -380,7 +380,6 @@
                                 <fontDescription key="fontDescription" name="Gilroy-SemiBold" family="Gilroy" pointSize="16"/>
                                 <state key="normal" title="Delete Appliances">
                                     <color key="titleColor" red="0.1176470588" green="0.81960784310000001" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
                                     <action selector="deleteAppliancePressed:" destination="iUK-nU-SDF" eventType="touchUpInside" id="sGN-04-nLb"/>
@@ -397,7 +396,6 @@
                                 <fontDescription key="fontDescription" name="Gilroy-SemiBold" family="Gilroy" pointSize="16"/>
                                 <state key="normal" title="Delete Cache">
                                     <color key="titleColor" red="0.1176470588" green="0.81960784310000001" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
                                     <action selector="deleteCachePressed:" destination="iUK-nU-SDF" eventType="touchUpInside" id="PiR-Us-Rdb"/>
